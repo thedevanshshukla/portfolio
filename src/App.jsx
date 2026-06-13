@@ -29,7 +29,7 @@ const profile = {
     "I build explainable, multi-agent architectures backed by rigorous deterministic validation and optimized hardware logic.",
   email: "dshukl2004@gmail.com",
   phone: "+91 9289153800",
-  education: "B.Tech. CSE, IIIT Bhopal | CGPA 8.45",
+  education: "B.Tech. CSE, IIIT Bhopal | CGPA 8.44",
   resumeUrl: "/resume/devansh_shukla_ai_g.pdf",
   links: [
     {
