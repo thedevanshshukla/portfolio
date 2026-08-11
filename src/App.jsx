@@ -25,9 +25,9 @@ import {
 
 const profile = {
   name: "Devansh Shukla",
-  role: "Founder & Backend Engineer @ ZapplyX | Distributed Systems & Agentic AI",
+  role: "Founder & AI Engineer @ ZapplyX | Agentic AI & LLM Systems | Backend Engineering",
   tagline:
-    "Engineering high-concurrency backend platforms, multi-agent LLM pipelines (FastAPI, Celery, Redis, MongoDB), and hardware optimization algorithms.",
+    "Final-year Computer Science undergraduate specializing in Agentic AI, LLM systems, and Backend Engineering. Experienced building and deploying production-grade AI systems using FastAPI, Redis, Celery, and MongoDB.",
   email: "dshukl2004@gmail.com",
   phone: "+91 9289153800",
   education: "B.Tech. CSE, IIIT Bhopal | CGPA 8.44 (2023–2027)",
@@ -173,7 +173,7 @@ const proofCards = [
   {
     title: "Flagship Venture",
     value: "ZapplyX (zapplyx.com)",
-    detail: "Founder & Backend Engineer. Built production multi-agent platform serving 30+ users & 12,000+ automated outreach profiles.",
+    detail: "Founder & AI Engineer. Built production multi-agent platform serving 30+ users & 12,000+ automated outreach profiles.",
     icon: Globe,
   },
   {
@@ -197,36 +197,35 @@ const proofCards = [
 ];
 
 const achievements = [
-  "Amazon ML Summer School 2026: Selected among 3,000 students out of 1.34 Lakh+ applicants (Top 2.5%).",
-  "Founder & Backend Engineer @ ZapplyX: Production platform live at zapplyx.com serving 30+ users across 12,000+ lead automations.",
-  "Competitive Programming Excellence: CodeChef 4-star (1824), LeetCode Knight (1902), Codeforces Specialist (1506) with 1000+ problems solved.",
-  "Global Contest Ranks: CodeChef (180th, 336th, 406th of 28,000+), Codeforces (608th of 40,000+), LeetCode (321st of 30,000+).",
-  "EY Techathon Round 2 Qualifier: Placed in Top 4,000 teams out of 2 Lakh+ participants, leading 5-member team on Stratabid.",
-  "Semi-Finalist, Tata Imagination Challenge: Top 5,000 out of 10 Lakh+ nationwide applicants in innovation strategy.",
-  "Executive, CODAME IIIT Bhopal: Organized coding contests and technical workshops for 550+ students with 50% participation growth.",
+  "Competitive Programming Excellence: Secured CodeChef 4-star (1824), Codeforces Specialist (1506), and LeetCode Knight (1902) while solving 1000+ algorithmic challenges.",
+  "Amazon ML Summer School 2026: Selected among 3,000 students from over 1.34 lakh applicants (Top 2.5%) for Amazon's flagship machine learning program.",
+  "Cohere Labs ML Summer School 2026: Received a certificate of participation for meaningful participation and contribution.",
+  "Global Contest Ranks: Secured top ranks on CodeChef (180th, 336th, 406th of 28,000+), Codeforces (608th of 40,000+), and LeetCode (321st of 30,000+).",
+  "CODAME IIIT Bhopal Leadership: Organized coding contests and technical workshops for 550+ students, increasing participation by 50% across 10+ institutes.",
+  "Tata Imagination Challenge: Ranked among the Top 5,000 participants out of 10 lakh+ nationwide applicants as a Semi-Finalist.",
 ];
 
 const timeline = [
   {
     year: "May 2026 – Present",
-    label: "Founder & Backend Engineer | ZapplyX",
+    label: "Founder & AI Engineer | ZapplyX",
     summary:
-      "Architected & deployed asynchronous multi-agent outreach platform serving 30+ users. Integrated FastAPI, Redis, Celery, and MongoDB to orchestrate 6 AI agents, local SMTP handshakes, 6-stage API fallbacks, and 1-page LaTeX resume compilation.",
+      "Architected and deployed a production AI workflow platform serving 30+ users. Built a scalable multi-agent workflow system coordinating 6 autonomous agents using FastAPI, Redis, Celery, MongoDB, and Playwright, and engineered production-grade backend infrastructure.",
     metrics: ["zapplyx.com Live", "30+ Active Users", "12,000+ Profiles", "6 Autonomous AI Agents"],
   },
   {
     year: "Jan 2026 – Present",
-    label: "Hardware Optimization Research",
+    label: "Research Project | Hardware Optimization for DSP",
     summary:
-      "Driving Particle Swarm Optimization (PSO) and DMR/TMR fault-tolerant hardware scheduling for DSP & image processing systems.",
+      "Optimized fault-tolerant hardware scheduling using Particle Swarm Optimization (PSO) and DMR/TMR techniques, reducing execution latency by 25% and improving area efficiency by 18% across DSP and image processing benchmarks.",
     metrics: ["25% latency drop", "18% area efficiency gain", "DSP benchmarks"],
   },
   {
     year: "Dec 2025 – Jan 2026",
-    label: "Agentic AI Team Lead | Stratabid (EY Techathon)",
+    label: "Team Leader | Agentic AI Project (EY Techathon)",
     summary:
-      "Led a 5-member team to design Stratabid, an agentic RFP orchestration engine featuring 4 parallel agent workflows, FAISS vector search, and weighted rule matching.",
-    metrics: ["Top 4,000 / 2 Lakh+", "4 parallel agents", "80% target TAT reduction"],
+      "Led a 5-member team to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows. Developed a hybrid retrieval and evaluation pipeline combining FAISS vector search with weighted rule-based scoring.",
+    metrics: ["Top 4,000 / 2 Lakh+", "4 parallel agents", "80% TAT reduction", "FAISS + Rules"],
   },
   {
     year: "2024 – 2025",
@@ -252,7 +251,7 @@ const projects = [
     title: "Courtroom Trading System",
     type: "Live AI Decision Engine",
     description:
-      "Bull-Bear-Judge multi-agent trading decision architecture with structured debate, risk-aware signal gating (momentum, ATR, trend), and zero-cost LLM replay via MongoDB memory layer.",
+      "LLM-powered multi-agent decision system using a Bull–Bear–Judge architecture, producing structured, explainable outputs. Engineered a hybrid validation pipeline with four market signals to filter setups and a persistent MongoDB reasoning layer that reduces repeat inference to zero.",
     repo: "https://github.com/thedevanshshukla/courtroom-trading/",
     demo: "https://courtroom-trading.vercel.app/",
     stack: ["FastAPI", "MongoDB", "LLM Agents", "Python"],
@@ -262,7 +261,7 @@ const projects = [
     title: "GlidePAY",
     type: "Payment Infrastructure",
     description:
-      "Custom UPI-style peer-to-peer payment workflow serving 20+ active users with 100% ACID MongoDB transactions, session-based security, and 35% reduced API latency.",
+      "Custom UPI-style peer-to-peer payment app serving 20+ active users. Implemented MongoDB transactions and session-based authentication to support secure payment flows, reducing API latency by 35% via route optimizations.",
     repo: "https://github.com/thedevanshshukla/GlidePAY-paymentGateway",
     demo: "https://glide-pay-payment-gateway-51l4.vercel.app/",
     stack: ["Flask", "React", "MongoDB", "REST API"],
@@ -516,10 +515,26 @@ function App() {
               </div>
               <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
-                  Core Specialization
+                  AI & LLM
                 </p>
-                <p className="mt-2 text-sm text-zinc-300 leading-relaxed">
-                  Backend Systems (FastAPI, Redis, Celery, MongoDB), Multi-Agent LLM Orchestration, Hardware Scheduling (PSO, DMR/TMR), REST APIs.
+                <p className="mt-2 text-sm text-zinc-300 leading-relaxed font-mono text-[11px] text-emerald-400">
+                  OpenAI SDK, FAISS, Agentic AI, Multi-Agent Systems, LLM Applications, Retrieval
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
+                <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+                  Backend & Systems
+                </p>
+                <p className="mt-2 text-sm text-zinc-300 leading-relaxed font-mono text-[11px]">
+                  FastAPI, Flask, Celery, Redis, MongoDB, PostgreSQL, Distributed Systems, Asynchronous Workflows
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
+                <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+                  Languages & Tools
+                </p>
+                <p className="mt-2 text-sm text-zinc-300 leading-relaxed font-mono text-[11px]">
+                  Python, C++, JavaScript, SQL, Git, GitHub, Docker, Linux, Prometheus, Postman
                 </p>
               </div>
               <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
@@ -527,7 +542,7 @@ function App() {
                   Top Ranks & Honors
                 </p>
                 <p className="mt-2 font-mono text-xs text-emerald-400 leading-relaxed">
-                  Amazon ML Summer School 2026 (Top 2.5%) | EY Techathon Top 4,000 | 4★ CodeChef (1824) | LeetCode Knight (1902) | Codeforces Specialist (1506)
+                  Amazon ML Summer School 2026 (Top 2.5%) | Cohere Labs ML Summer School 2026 | EY Techathon Top 4,000 | 4★ CodeChef (1824) | LeetCode Knight (1902) | Codeforces Specialist (1506)
                 </p>
               </div>
             </div>
