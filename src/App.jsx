@@ -197,12 +197,16 @@ const proofCards = [
 ];
 
 const achievements = [
-  "Competitive Programming Excellence: Secured CodeChef 4-star (1824), Codeforces Specialist (1506), and LeetCode Knight (1902) while solving 1000+ algorithmic challenges.",
-  "Amazon ML Summer School 2026: Selected among 3,000 students from over 1.34 lakh applicants (Top 2.5%) for Amazon's flagship machine learning program.",
-  "Cohere Labs ML Summer School 2026: Received a certificate of participation for meaningful participation and contribution.",
-  "Global Contest Ranks: Secured top ranks on CodeChef (180th, 336th, 406th of 28,000+), Codeforces (608th of 40,000+), and LeetCode (321st of 30,000+).",
-  "CODAME IIIT Bhopal Leadership: Organized coding contests and technical workshops for 550+ students, increasing participation by 50% across 10+ institutes.",
-  "Tata Imagination Challenge: Ranked among the Top 5,000 participants out of 10 lakh+ nationwide applicants as a Semi-Finalist.",
+  { text: "Competitive Programming Excellence: Secured CodeChef 4-star (1824), Codeforces Specialist (1506), and LeetCode Knight (1902) while solving 1000+ algorithmic challenges." },
+  { text: "Amazon ML Summer School 2026: Selected among 3,000 students from over 1.34 lakh applicants (Top 2.5%) for Amazon's flagship machine learning program." },
+  {
+    text: "Cohere Labs ML Summer School 2026: Received a certificate of participation for meaningful participation and contribution.",
+    link: "https://credsverse.com/credentials/252675e3-526c-4678-810d-d560ec4d73b6",
+    linkText: "View Certificate"
+  },
+  { text: "Global Contest Ranks: Secured top ranks on CodeChef (180th, 336th, 406th of 28,000+), Codeforces (608th of 40,000+), and LeetCode (321st of 30,000+)." },
+  { text: "CODAME IIIT Bhopal Leadership: Organized coding contests and technical workshops for 550+ students, increasing participation by 50% across 10+ institutes." },
+  { text: "Tata Imagination Challenge: Ranked among the Top 5,000 participants out of 10 lakh+ nationwide applicants as a Semi-Finalist." },
 ];
 
 const timeline = [
@@ -748,10 +752,21 @@ function App() {
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {achievements.map((item) => (
                 <div
-                  key={item}
-                  className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-sm leading-7 text-zinc-300"
+                  key={item.text}
+                  className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-sm leading-7 text-zinc-300 flex flex-col justify-between"
                 >
-                  {item}
+                  <p>{item.text}</p>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition"
+                    >
+                      <span>{item.linkText || "View Link"}</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ) : null}
                 </div>
               ))}
             </div>
