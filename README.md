@@ -30,3 +30,5 @@ npm run preview
 ## Live site
 
 [portfolio-flax-seven-97.vercel.app](https://portfolio-flax-seven-97.vercel.app)
+
+#future changes- have domain with own name
