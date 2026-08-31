@@ -31,4 +31,3 @@ npm run preview
 
 [portfolio-flax-seven-97.vercel.app](https://portfolio-flax-seven-97.vercel.app)
 
-#future changes- have domain with own name
