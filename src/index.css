@@ -10,6 +10,40 @@
   color-scheme: dark;
   font-family: var(--font-sans);
   background: #09090b;
+
+  --accent-color: #10b981;
+  --accent-rgb: 16, 185, 129;
+  --accent-text: #34d399;
+  --accent-border: rgba(16, 185, 129, 0.3);
+  --accent-bg-subtle: rgba(16, 185, 129, 0.1);
+  --accent-glow: rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="violet"] {
+  --accent-color: #a855f7;
+  --accent-rgb: 168, 85, 247;
+  --accent-text: #c084fc;
+  --accent-border: rgba(168, 85, 247, 0.3);
+  --accent-bg-subtle: rgba(168, 85, 247, 0.1);
+  --accent-glow: rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="cyan"] {
+  --accent-color: #06b6d4;
+  --accent-rgb: 6, 182, 212;
+  --accent-text: #22d3ee;
+  --accent-border: rgba(6, 182, 212, 0.3);
+  --accent-bg-subtle: rgba(6, 182, 212, 0.1);
+  --accent-glow: rgba(6, 182, 212, 0.2);
+}
+
+[data-theme="amber"] {
+  --accent-color: #f59e0b;
+  --accent-rgb: 245, 158, 11;
+  --accent-text: #fbbf24;
+  --accent-border: rgba(245, 158, 11, 0.3);
+  --accent-bg-subtle: rgba(245, 158, 11, 0.1);
+  --accent-glow: rgba(245, 158, 11, 0.2);
 }
 
 html {
@@ -37,6 +71,62 @@ a {
 }
 
 ::selection {
-  background: rgba(34, 197, 94, 0.22);
+  background: rgba(var(--accent-rgb), 0.25);
   color: #fafafa;
+}
+
+/* Linear/Vercel style reactive spotlight glow */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(var(--accent-rgb), 0.12),
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.35s ease;
+  opacity: 0;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-border {
+  position: relative;
+}
+
+.spotlight-border::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(var(--accent-rgb), 0.55),
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.spotlight-border:hover::after {
+  opacity: 1;
 }
