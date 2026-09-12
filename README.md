@@ -31,6 +31,5 @@ npm run preview
 
 [portfolio-flax-seven-97.vercel.app](https://portfolio-flax-seven-97.vercel.app)
 
-## Futre plans
-buy own domain named devanshshukla.com and move portfolio onto it
+
 
