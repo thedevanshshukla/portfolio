@@ -31,5 +31,8 @@ npm run preview
 
 [portfolio-flax-seven-97.vercel.app](https://portfolio-flax-seven-97.vercel.app)
 
+## In future 
+use own domain name instead of random url
+
 
 
