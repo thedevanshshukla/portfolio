@@ -65,7 +65,7 @@ function SpotlightCard({ children, className = "", onClick, ...props }) {
 
 const profile = {
   name: "Devansh Shukla",
-  role: "Founder & AI Engineer @ ZapplyX | LLM Systems & Backend Engineering",
+  role: "AI Engineering Intern @ ZapplyX | LLM Systems & Backend Engineering",
   tagline:
     "Final-year Computer Science undergraduate specializing in AI Engineering, LLM systems, and Backend Engineering. Experienced building production-grade AI systems with FastAPI, Redis, Celery, and MongoDB, with hands-on experience in agentic workflows, RAG, realtime AI, asynchronous processing, and system integration.",
   email: "dshukl2004@gmail.com",
@@ -201,30 +201,47 @@ const projects = [
 const timeline = [
   {
     year: "May 2026 – Present",
-    label: "AI Engineer | ZapplyX",
+    label: "AI Engineering Intern | ZapplyX",
     summary:
-      "Architected and deployed a production AI workflow platform serving 30+ users, automating startup discovery, enrichment, LLM personalization, resume tailoring, and outreach across 12,000+ founder profiles. Built a scalable multi-agent system using FastAPI, Redis, Celery, MongoDB, and Playwright, coordinating 6 autonomous agents via asynchronous queues, retries, and concurrency control.",
+      "Architected and deployed a production AI workflow platform serving 30+ users, automating startup discovery, enrichment, LLM personalization, resume tailoring, and outreach across 12,000+ founder profiles.",
+    bullets: [
+      "Architected and deployed a production AI workflow platform serving 30+ users, automating startup discovery, enrichment, LLM personalization, resume tailoring, and outreach across 12,000+ founder profiles.",
+      "Built a scalable multi-agent system using FastAPI, Redis, Celery, MongoDB, and Playwright, coordinating 6 autonomous agents via asynchronous queues, retries, and concurrency control for reliable parallel execution.",
+      "Engineered production AI infrastructure with multi-provider enrichment, SMTP verification, Prometheus monitoring, structured logging, and trace IDs, strengthening workflow reliability and observability.",
+    ],
     metrics: ["zapplyx.com Live", "30+ Active Users", "12,000+ Profiles", "6 Autonomous AI Agents"],
   },
   {
     year: "Jan 2026 – Present",
     label: "Research Project | Hardware Resource Optimization & Digital Watermarking",
     summary:
-      "Formulated a metaheuristic hardware optimization framework for DSP data-flow graphs, integrating scheduling, register allocation, graph coloring, and area-latency analysis across 34 DSP benchmarks. Implemented and benchmarked 7 metaheuristic algorithms (PSO, GWO, ACO, BFO, Firefly, GA, KH) and 12 security algorithms for digital watermark embedding with register conflict resolution.",
-    metrics: ["34 DSP Benchmarks", "7 Metaheuristic Algos", "12 Security Algorithms", "25% Latency Drop"],
+      "Formulated a metaheuristic hardware optimization framework for DSP data-flow graphs across 34 DSP benchmarks, implementing 7 metaheuristic algorithms and 12 security algorithms for digital signature embedding.",
+    bullets: [
+      "Formulated a metaheuristic hardware optimization framework for DSP data-flow graphs, integrating scheduling, register allocation, graph coloring, and area-latency analysis across 34 DSP benchmarks.",
+      "Implemented and benchmarked 7 metaheuristic algorithms: PSO, GWO, ACO, BFO, Firefly, GA, and KH, using a unified pipeline for hardware resource optimization.",
+      "Extended the framework with 12 security algorithms for digital signature embedding, balancing hardware cost and watermark security with post-embedding register conflict resolution.",
+    ],
+    metrics: ["34 DSP Benchmarks", "7 Metaheuristic Algos", "12 Security Algorithms", "Conflict Resolution"],
   },
   {
     year: "Dec 2025 – Jan 2026",
     label: "Team Leader | Agentic AI Project, EY Techathon (Round 2 Qualifier)",
     summary:
-      "Ranked among the top 4,000 teams out of ~2 lakh registered participants, leading a 5-member team (Team Dna paradox) to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows. Developed a hybrid retrieval pipeline combining FAISS vector search with weighted rule-based scoring across 100+ specification parameters, reducing bid turnaround time by up to 80%.",
+      "Ranked among the top 4,000 teams out of approximately 2 lakh registered participants, leading a 5-member team to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows.",
+    bullets: [
+      "Ranked among the top 4,000 teams out of approximately 2 lakh registered participants, leading a 5-member team to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows.",
+      "Developed a hybrid retrieval and evaluation pipeline combining FAISS vector search with weighted rule-based scoring across 100+ specification parameters, reducing bid turnaround time by up to 80%.",
+    ],
     metrics: ["Top 4,000 / 2 Lakh+", "4 Parallel Agents", "80% TAT Reduction", "FAISS + Rule Scoring"],
   },
   {
     year: "2024 – 2025",
     label: "Executive | CODAME IIIT Bhopal",
     summary:
-      "Led community outreach and technical operations, organizing competitive coding contests and technical workshops for 550+ students and increasing participation by 50% across 10+ engineering institutes.",
+      "Organized competitive coding contests and technical workshops for 550+ students, increasing multi-campus participation by 50% across 10+ engineering institutes.",
+    bullets: [
+      "Demonstrated leadership as Executive, CODAME IIIT Bhopal, organizing coding contests and technical workshops for 550+ students and increasing participation by 50% through outreach across 10+ institutes.",
+    ],
     metrics: ["550+ Students", "10+ Institutes", "50% Participation Growth"],
   },
 ];
@@ -538,7 +555,7 @@ function ResumeModal({ isOpen, onClose }) {
                   </span>
                 </div>
                 <p className="text-xs text-zinc-400 font-mono">
-                  AI Engineer & LLM Systems • B.Tech CSE (IIIT Bhopal)
+                  AI Engineering Intern @ ZapplyX • B.Tech CSE (IIIT Bhopal)
                 </p>
               </div>
             </div>
@@ -746,7 +763,7 @@ function App() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-emerald-400 hover:underline"
                 >
-                  <Zap className="h-3.5 w-3.5" /> Founder & AI Engineer @ ZapplyX
+                  <Zap className="h-3.5 w-3.5" /> AI Engineering Intern @ ZapplyX
                 </a>
               </div>
 
@@ -982,7 +999,7 @@ function App() {
                 Engineering Timeline
               </h2>
               <p className="mt-4 text-sm leading-7 text-zinc-300">
-                From architecting production AI platforms like <strong className="text-emerald-400">ZapplyX</strong> (serving 30+ users and 12,000+ outreach profiles) and <strong className="text-emerald-400">VoiceHire</strong> to DSP hardware optimization metaheuristics and competitive programming, this timeline outlines major systems milestones.
+                From engineering production multi-agent systems at <strong className="text-emerald-400">ZapplyX</strong> (serving 30+ users and 12,000+ outreach profiles) and realtime voice interviewers (<strong className="text-emerald-400">VoiceHire</strong>) to DSP hardware optimization metaheuristics and competitive programming, this timeline outlines major engineering and research milestones.
               </p>
             </div>
 
@@ -1012,7 +1029,18 @@ function App() {
                       <div className="m-[5px] h-2.5 w-2.5 rounded-full bg-emerald-500" />
                     </div>
                     <h3 className="text-base sm:text-lg font-semibold text-zinc-100">{item.label}</h3>
-                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-zinc-400">{item.summary}</p>
+                    {item.bullets ? (
+                      <div className="mt-3 space-y-2">
+                        {item.bullets.map((bullet, bIdx) => (
+                          <div key={bIdx} className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-zinc-300">
+                            <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
+                            <span>{bullet}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-zinc-400">{item.summary}</p>
+                    )}
                     <div className="mt-4 flex flex-wrap gap-2">
                       {item.metrics.map((metric) => (
                         <span
@@ -1244,7 +1272,7 @@ function App() {
       <footer className="mt-20 border-t border-zinc-800/80 bg-zinc-950/50 py-8 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-500">
-            Engineered by <span className="text-zinc-300 font-sans font-semibold">Devansh Shukla</span> | Founder & AI Engineer @{" "}
+            Engineered by <span className="text-zinc-300 font-sans font-semibold">Devansh Shukla</span> | AI Engineering Intern @{" "}
             <a href="https://www.zapplyx.com" target="_blank" rel="noreferrer" className="text-emerald-400 hover:underline">
               ZapplyX
             </a>
