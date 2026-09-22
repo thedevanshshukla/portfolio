@@ -37,6 +37,13 @@ const ACCENT_THEMES = [
   { id: "rose", label: "Crimson Rose", dot: "bg-rose-500" },
 ];
 
+const BG_STYLES = [
+  { id: "dots", label: "Cyber Dots", desc: "Linear / Vercel micro-grid" },
+  { id: "aurora", label: "Deep Aurora", desc: "Ambient floating glows" },
+  { id: "grid", label: "Blueprint Grid", desc: "Architectural lines" },
+  { id: "solid", label: "Obsidian Solid", desc: "Original pure pitch black" },
+];
+
 const NAV_ROUTES = [
   { id: "projects", label: "PROJECTS", icon: Layers },
   { id: "about", label: "ABOUT ME", icon: User },
@@ -181,6 +188,7 @@ export default function App() {
   const [activeRoute, setActiveRoute] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState("emerald");
+  const [bgStyle, setBgStyle] = useState("dots");
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [selectedCert, setSelectedCert] = useState(null);
@@ -717,7 +725,33 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen flex bg-[#08090b] text-[#f1f5f9] font-sans selection:bg-emerald-500/30 selection:text-white">
+    <div
+      className={`min-h-screen flex text-[#f1f5f9] font-sans selection:bg-emerald-500/30 selection:text-white relative overflow-x-hidden transition-colors duration-500 ${
+        bgStyle === "dots"
+          ? "bg-style-dots"
+          : bgStyle === "grid"
+          ? "bg-style-grid"
+          : "bg-style-solid"
+      }`}
+    >
+      {/* Background Ambience Layers */}
+      {bgStyle === "dots" && (
+        <>
+          <div className="ambient-glow-top" />
+          <div className="fixed inset-0 pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_85%)] bg-[#08090b]/40" />
+        </>
+      )}
+
+      {bgStyle === "aurora" && (
+        <>
+          <div className="aurora-orb-top" />
+          <div className="aurora-orb-bottom" />
+        </>
+      )}
+
+      {bgStyle === "grid" && (
+        <div className="ambient-glow-top opacity-50" />
+      )}
       {/* Toast Notification */}
       <AnimatePresence>
         {copiedEmail && (
@@ -890,25 +924,59 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.95, y: -10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  className="absolute bottom-full right-0 mb-2 p-2 rounded-xl bg-zinc-900 border border-white/10 shadow-2xl flex flex-col gap-1 z-50 min-w-[140px]"
+                  className="absolute bottom-full right-0 mb-2 p-3 rounded-2xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col gap-2.5 z-50 min-w-[210px]"
                 >
-                  {ACCENT_THEMES.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => {
-                        setTheme(t.id);
-                        setThemeMenuOpen(false);
-                      }}
-                      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition text-left cursor-pointer ${
-                        theme === t.id
-                          ? "bg-white/[0.08] text-white font-bold"
-                          : "text-zinc-400 hover:text-zinc-200"
-                      }`}
-                    >
-                      <span className={`h-2.5 w-2.5 rounded-full ${t.dot}`} />
-                      <span>{t.label}</span>
-                    </button>
-                  ))}
+                  <div>
+                    <span className="font-mono text-[10px] text-zinc-400 font-bold uppercase tracking-wider block px-1 pb-1">
+                      Accent Glow
+                    </span>
+                    <div className="flex flex-col gap-1">
+                      {ACCENT_THEMES.map((t) => (
+                        <button
+                          key={t.id}
+                          onClick={() => setTheme(t.id)}
+                          className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition text-left cursor-pointer ${
+                            theme === t.id
+                              ? "bg-white/[0.08] text-white font-bold"
+                              : "text-zinc-400 hover:text-zinc-200"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className={`h-2.5 w-2.5 rounded-full ${t.dot}`} />
+                            <span>{t.label}</span>
+                          </div>
+                          {theme === t.id && <Check className="h-3 w-3 text-emerald-400" />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <hr className="border-white/10" />
+
+                  <div>
+                    <span className="font-mono text-[10px] text-zinc-400 font-bold uppercase tracking-wider block px-1 pb-1">
+                      Background Style
+                    </span>
+                    <div className="flex flex-col gap-1">
+                      {BG_STYLES.map((b) => (
+                        <button
+                          key={b.id}
+                          onClick={() => setBgStyle(b.id)}
+                          className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition text-left cursor-pointer ${
+                            bgStyle === b.id
+                              ? "bg-white/[0.08] text-white font-bold"
+                              : "text-zinc-400 hover:text-zinc-200"
+                          }`}
+                        >
+                          <div>
+                            <span className="block">{b.label}</span>
+                            <span className="text-[9px] text-zinc-500 font-sans block">{b.desc}</span>
+                          </div>
+                          {bgStyle === b.id && <Check className="h-3 w-3 text-emerald-400" />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
