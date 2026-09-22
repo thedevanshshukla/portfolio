@@ -37,16 +37,6 @@ const ACCENT_THEMES = [
   { id: "rose", label: "Crimson Rose", dot: "bg-rose-500" },
 ];
 
-const MASCOT_OPTIONS = [
-  { id: "bongo_cat", label: "Bongo Cat", desc: "Typing Kitty (Default)", src: "/mascots/bongo_cat.gif" },
-  { id: "pixel_coder", label: "Pixel Coder", desc: "Retro Hacker typing", src: "/mascots/pixel_coder.gif" },
-  { id: "pixel_bot", label: "Cyber Bot", desc: "Cute AI companion droid", src: "/mascots/pixel_bot.gif" },
-  { id: "laptop_parrot", label: "Party Parrot", desc: "Laptop party parrot", src: "/mascots/laptop_parrot.gif" },
-  { id: "pixel_ghost", label: "Pixel Ghost", desc: "Floating cyber companion", src: "/mascots/pixel_ghost.gif" },
-  { id: "dino", label: "Chrome Dino", desc: "Running pixel dinosaur", src: "/mascots/dino.gif" },
-  { id: "fast_cat", label: "Turbo Kitty", desc: "Ultra fast typing cat", src: "/mascots/fast_cat.gif" },
-];
-
 const NAV_ROUTES = [
   { id: "projects", label: "PROJECTS", icon: Layers },
   { id: "about", label: "ABOUT ME", icon: User },
@@ -191,7 +181,6 @@ export default function App() {
   const [activeRoute, setActiveRoute] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState("emerald");
-  const [selectedMascot, setSelectedMascot] = useState(MASCOT_OPTIONS[0]);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [selectedCert, setSelectedCert] = useState(null);
@@ -802,40 +791,18 @@ export default function App() {
               })}
             </nav>
 
-            <div className="pt-4 border-t border-white/[0.08] space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-zinc-500">Theme Glow</span>
-                <div className="flex items-center gap-1.5">
-                  {ACCENT_THEMES.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => setTheme(t.id)}
-                      className={`h-6 w-6 rounded-full ${t.dot} ${
-                        theme === t.id ? "ring-2 ring-white scale-110" : "opacity-60"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-zinc-500">Mascot</span>
-                <div className="flex items-center gap-1.5 overflow-x-auto py-1">
-                  {MASCOT_OPTIONS.map((m) => (
-                    <button
-                      key={m.id}
-                      onClick={() => setSelectedMascot(m)}
-                      className={`p-1 rounded-lg border transition cursor-pointer ${
-                        selectedMascot.id === m.id
-                          ? "border-emerald-500/60 bg-white/10"
-                          : "border-transparent bg-white/[0.03] opacity-60"
-                      }`}
-                      title={m.label}
-                    >
-                      <img src={m.src} alt={m.label} className="h-6 w-6 object-contain" />
-                    </button>
-                  ))}
-                </div>
+            <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
+              <span className="text-xs font-mono text-zinc-500">Theme Glow</span>
+              <div className="flex items-center gap-1.5">
+                {ACCENT_THEMES.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setTheme(t.id)}
+                    className={`h-6 w-6 rounded-full ${t.dot} ${
+                      theme === t.id ? "ring-2 ring-white scale-110" : "opacity-60"
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </motion.div>
@@ -858,18 +825,18 @@ export default function App() {
             </button>
           </div>
 
-          {/* Animated Pixel Mascot (Centered and dynamic) */}
+          {/* Animated Pixel Cat Mascot (Centered and Enlarged) */}
           <div className="my-3 flex items-center justify-center">
             <a
               href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block transition-transform duration-300 hover:scale-115 active:scale-95 cursor-pointer"
-              title={`Visit GitHub - Mascot: ${selectedMascot.label}`}
+              title="Visit GitHub"
             >
               <img
-                src={selectedMascot.src}
-                alt={`Animated Mascot - ${selectedMascot.label}`}
+                src="/bongo_cat.gif"
+                alt="Animated Mascot - Devansh Shukla GitHub"
                 className="h-14 w-auto object-contain select-none drop-shadow-md"
               />
             </a>
@@ -915,7 +882,7 @@ export default function App() {
             <button
               onClick={() => setThemeMenuOpen(!themeMenuOpen)}
               className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-400 hover:text-white transition cursor-pointer flex items-center justify-center"
-              title="Change Accent Glow & Mascot"
+              title="Change Accent Glow Theme"
             >
               <Palette className="h-4 w-4 text-emerald-400" />
             </button>
@@ -926,7 +893,7 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.95, y: -10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  className="absolute bottom-full right-0 mb-2 p-3 rounded-2xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col gap-2.5 z-50 min-w-[220px]"
+                  className="absolute bottom-full right-0 mb-2 p-3 rounded-2xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col gap-2.5 z-50 min-w-[200px]"
                 >
                   <div>
                     <span className="font-mono text-[10px] text-zinc-400 font-bold uppercase tracking-wider block px-1 pb-1">
@@ -948,40 +915,6 @@ export default function App() {
                             <span>{t.label}</span>
                           </div>
                           {theme === t.id && <Check className="h-3 w-3 text-emerald-400" />}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <hr className="border-white/10" />
-
-                  <div>
-                    <span className="font-mono text-[10px] text-zinc-400 font-bold uppercase tracking-wider block px-1 pb-1">
-                      Mascot / Pet
-                    </span>
-                    <div className="flex flex-col gap-1 max-h-56 overflow-y-auto pr-1">
-                      {MASCOT_OPTIONS.map((m) => (
-                        <button
-                          key={m.id}
-                          onClick={() => setSelectedMascot(m)}
-                          className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition text-left cursor-pointer ${
-                            selectedMascot.id === m.id
-                              ? "bg-white/[0.08] text-white font-bold"
-                              : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]"
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <img
-                              src={m.src}
-                              alt={m.label}
-                              className="h-6 w-6 object-contain rounded shrink-0 bg-white/[0.04] p-0.5"
-                            />
-                            <div>
-                              <span className="block leading-tight text-white">{m.label}</span>
-                              <span className="text-[9px] text-zinc-500 font-sans block leading-tight">{m.desc}</span>
-                            </div>
-                          </div>
-                          {selectedMascot.id === m.id && <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0" />}
                         </button>
                       ))}
                     </div>
