@@ -1,42 +1,63 @@
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight,
+  AlertCircle,
   Award,
-  BadgeCheck,
-  Brain,
-  CheckCircle2,
+  BookOpen,
+  Briefcase,
+  Check,
   ChevronRight,
   Code2,
-  Cpu,
+  Copy,
   Download,
   ExternalLink,
   FileText,
-  FolderGit2,
   Github,
-  Globe,
-  GraduationCap,
   Layers,
   Linkedin,
+  Loader2,
   Mail,
-  Mic,
+  Menu,
+  MessageCircle,
   Palette,
   Phone,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  TerminalSquare,
+  Send,
+  Terminal,
   Trophy,
+  User,
   X,
-  Zap,
 } from "lucide-react";
+import portraitImg from "./portrait.png";
 
 const ACCENT_THEMES = [
   { id: "emerald", label: "Cyber Emerald", dot: "bg-emerald-400" },
-  { id: "violet", label: "Neural Violet", dot: "bg-purple-400" },
   { id: "cyan", label: "Electric Cyan", dot: "bg-cyan-400" },
+  { id: "violet", label: "Neural Violet", dot: "bg-purple-400" },
   { id: "amber", label: "Synth Amber", dot: "bg-amber-400" },
+  { id: "rose", label: "Crimson Rose", dot: "bg-rose-500" },
 ];
+
+const NAV_ROUTES = [
+  { id: "projects", label: "PROJECTS", icon: Layers },
+  { id: "about", label: "ABOUT ME", icon: User },
+  { id: "experience", label: "EXPERIENCE", icon: Briefcase },
+  { id: "working-on", label: "WORKING ON", icon: Terminal },
+  { id: "programming", label: "PROGRAMMING", icon: Code2 },
+  { id: "certificates", label: "CERTIFICATES", icon: Award },
+  { id: "education", label: "EDUCATION", icon: BookOpen },
+  { id: "contact", label: "CONTACT ME", icon: Mail },
+];
+
+const SOCIAL_LINKS = {
+  github: "https://github.com/thedevanshshukla",
+  linkedin: "https://www.linkedin.com/in/devansh-shukla-dev",
+  twitter: "https://x.com/Devansh_shu",
+  leetcode: "https://leetcode.com/u/int_ro_ve_rt/",
+  codechef: "https://www.codechef.com/users/i_am_devansh",
+  codeforces: "https://codeforces.com/profile/int_ro_ve_rt",
+  email: "dshukl2004@gmail.com",
+  phone: "+91 9289153800",
+};
 
 function SpotlightCard({ children, className = "", onClick, ...props }) {
   const cardRef = useRef(null);
@@ -58,1235 +79,2404 @@ function SpotlightCard({ children, className = "", onClick, ...props }) {
       className={`spotlight-card spotlight-border ${className}`}
       {...props}
     >
-      <div className="relative z-10 w-full h-full flex flex-col justify-between">{children}</div>
+      {children}
     </div>
   );
 }
 
-const profile = {
-  name: "Devansh Shukla",
-  role: "AI Engineering Intern @ ZapplyX | LLM Systems & Backend Engineering",
-  tagline:
-    "Final-year Computer Science undergraduate specializing in AI Engineering, LLM systems, and Backend Engineering. Experienced building production-grade AI systems with FastAPI, Redis, Celery, and MongoDB, with hands-on experience in agentic workflows, RAG, realtime AI, asynchronous processing, and system integration.",
-  email: "dshukl2004@gmail.com",
-  phone: "+91 9289153800",
-  education: "B.Tech. in Computer Science & Engineering, IIIT Bhopal (Sept 2023 – Jun 2027) | CGPA: 8.44",
-  resumeUrl: "/resume/devansh_shukla_ai_g.pdf",
-  zapplyxUrl: "https://www.zapplyx.com",
-  links: [
-    {
-      label: "ZapplyX",
-      href: "https://www.zapplyx.com",
-      icon: Globe,
-      featured: true,
-    },
-    {
-      label: "GitHub",
-      href: "https://github.com/thedevanshshukla",
-      icon: Github,
-    },
-    {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/devansh-shukla-dev",
-      icon: Linkedin,
-    },
-    {
-      label: "LeetCode",
-      href: "https://leetcode.com/u/int_ro_ve_rt/",
-      icon: TerminalSquare,
-    },
-    {
-      label: "CodeChef",
-      href: "https://www.codechef.com/users/i_am_devansh",
-      icon: Trophy,
-    },
-    {
-      label: "Codeforces",
-      href: "https://codeforces.com/profile/int_ro_ve_rt",
-      icon: Zap,
-    },
-  ],
-};
+// Custom Platform Icons
+const LeetCodeIcon = ({ className = "h-4 w-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 4.815 3.521 5.858 5.858 0 0 0 2.457-.345 5.76 5.76 0 0 0 1.624-.877l3.665-3.665c.574-.574.574-1.503 0-2.077-.574-.574-1.503-.574-2.077 0l-3.665 3.665a3.003 3.003 0 0 1-1.047.608 2.924 2.924 0 0 1-2.128-.088 2.984 2.984 0 0 1-1.616-1.597 2.98 2.98 0 0 1-.038-2.222 2.96 2.96 0 0 1 .632-1.077l3.854-4.126 5.406-5.788c.574-.574.574-1.503 0-2.077A1.37 1.37 0 0 0 13.483 0z" />
+    <path d="M9.828 14.828a1.468 1.468 0 0 0 0 2.077l2.586 2.586a1.468 1.468 0 0 0 2.077 0l7.707-7.707a1.468 1.468 0 0 0 0-2.077l-7.707-7.707a1.468 1.468 0 0 0-2.077 0l-2.586 2.586a1.468 1.468 0 0 0 0 2.077l5.621 5.621-5.621 5.621z" fill="#FFA116" />
+  </svg>
+);
 
-const stats = [
-  { label: "Active Platform Users", value: "30+ Users", meta: "ZapplyX Live", tone: "emerald" },
-  { label: "Outreach Automated", value: "12,000+", meta: "Founders", tone: "emerald" },
-  {
-    label: "Algorithmic Rigor",
-    value: "1902 LC | 1824 CC | 1506 CF",
-    meta: "Knight & 4★",
-    tone: "emerald",
-  },
-  { label: "Academic Standing", value: "8.44 CGPA", meta: "IIIT Bhopal", tone: "emerald" },
-];
+const CodeChefIcon = ({ className = "h-4 w-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.96 2C6.46 2 2 6.46 2 11.96c0 4.4 2.85 8.13 6.81 9.42.5.09.68-.22.68-.48v-1.7c-2.77.6-3.36-1.34-3.36-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48 3.96-1.3 6.8-5.03 6.8-9.42C22 6.46 17.46 2 11.96 2z" />
+    <circle cx="12" cy="12" r="3.5" fill="#5B4638" />
+  </svg>
+);
 
-const projects = [
-  {
-    title: "VoiceHire",
-    type: "Realtime Voice AI Interviewer",
-    badge: "Production v1.0",
-    description:
-      "Enterprise-grade, realtime Voice AI technical interviewer built to conduct structured, adaptive, and evidence-grounded engineering assessments. Features Studio-grade Web Audio noise isolation, Deepgram Nova-2 STT with domain keyword boosting, sub-150ms barge-in interruptions, mandatory resume deep-dives, calibrated 5-dimensional evaluation rubrics, and automated audit scorecards.",
-    highlights: [
-      "Sub-150ms barge-in audio interruption & Web Audio noise suppression pipeline",
-      "Deepgram Nova-2 STT with technical domain boosting (PostgreSQL, Redis, Kafka, MVCC, B-Tree, Celery, Docker)",
-      "6-Stage adaptive interview FSM with mandatory Resume/JD deep-dives & single-question enforcement",
-      "Calibrated 5D evaluation engine with weighted scoring, evidence quote extraction & contradiction detection",
-    ],
-    repo: "https://github.com/thedevanshshukla/Voice_Hire",
-    demo: "https://voice-hire-devansh-shuklas-projects.vercel.app/",
-    stack: ["FastAPI", "React 18", "TypeScript", "Deepgram STT", "ElevenLabs", "LiveKit", "MongoDB Atlas", "OpenAI / Gemini", "Prometheus"],
-  },
-  {
-    title: "ZapplyX",
-    type: "Flagship Multi-Agent Platform",
-    badge: "Live Product (30+ Users)",
-    description:
-      "Production-grade asynchronous job hunt and outreach platform. Crawls company profile cards, performs SMTP verification with 6-stage API fallback, parses LLM bottlenecks via Gemini 2.5, tailors LaTeX resumes in a 1-page layout search loop, and dispatches tracked campaigns across 12,000+ founder profiles.",
-    highlights: [
-      "Multi-agent mesh coordinating 6 autonomous agents via Celery queues & Redis broker",
-      "Local SMTP handshake + 6-stage API fallbacks (Apollo, Lusha, Hunter)",
-      "LaTeX 1-page layout search loop with Base64 caching in MongoDB",
-      "Multi-provider enrichment, Prometheus monitoring, structured logging & trace IDs",
-    ],
-    repo: "https://github.com/thedevanshshukla",
-    demo: "https://www.zapplyx.com",
-    stack: ["FastAPI", "Redis", "Celery", "MongoDB", "Gemini 2.5", "Playwright", "Prometheus"],
-  },
-  {
-    title: "Courtroom Trading System",
-    type: "Live AI Decision Engine",
-    badge: "Live System",
-    description:
-      "Designed an LLM-powered multi-agent decision system using a Bull–Bear–Judge architecture, producing structured, explainable outputs with deterministic validation. Engineered a hybrid validation pipeline combining LLM outputs with 4 market signals and a MongoDB reasoning layer reducing repeat inference to 0 additional LLM calls with O(1) retrieval for history replay.",
-    highlights: [
-      "Multi-agent Bull–Bear–Judge consensus architecture for explainable signals",
-      "Hybrid validation combining LLMs with 4 technical market indicators (RSI, ATR, moving average)",
-      "Persistent MongoDB reasoning cache enabling zero-cost replay and instant history lookup",
-    ],
-    repo: "https://github.com/thedevanshshukla/courtroom-trading/",
-    demo: "https://courtroom-trading.vercel.app/",
-    stack: ["FastAPI", "MongoDB", "LLM Multi-Agent", "Python", "TradingView"],
-  },
-  {
-    title: "Stratabid™ (EY Techathon)",
-    type: "Agentic RFP Orchestration",
-    badge: "Round 2 Qualifier (Top 4k/2L+)",
-    description:
-      "Agentic RFP orchestration system with 4 parallel agent workflows. Developed a hybrid retrieval and evaluation pipeline combining FAISS vector search with weighted rule-based scoring across 100+ specification parameters, reducing bid turnaround time by up to 80%.",
-    highlights: [
-      "4 parallel agents: Parser, Clause Retriever, Weighted Scorer, Proposal Assembler",
-      "Hybrid FAISS vector search + rule-based scoring on 100+ parameters",
-      "80% reduction in RFP turnaround time with full audit trail compliance",
-    ],
-    repo: "https://github.com/thedevanshshukla",
-    stack: ["Python", "FAISS Vector DB", "LangChain", "FastAPI", "Multi-Agent FSM"],
-  },
-  {
-    title: "GlidePAY",
-    type: "Payment Infrastructure",
-    badge: "Deployed",
-    description:
-      "Custom UPI-style peer-to-peer payment app serving 20+ active users. Implemented MongoDB transactions and session-based authentication to support secure payment flows, reducing API latency by 35% via route optimizations.",
-    highlights: [
-      "ACID transactions in MongoDB for robust double-entry balance updates",
-      "Session authentication and route latency optimizations (-35% latency)",
-    ],
-    repo: "https://github.com/thedevanshshukla/GlidePAY-paymentGateway",
-    demo: "https://glide-pay-payment-gateway-51l4.vercel.app/",
-    stack: ["Flask", "React", "MongoDB", "REST API"],
-  },
-];
+const CodeforcesIcon = ({ className = "h-4 w-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M4.5 7.5a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-3 0v-11a1.5 1.5 0 0 1 1.5-1.5z" fill="#FFD700" />
+    <path d="M12 3a1.5 1.5 0 0 1 1.5 1.5v15.5a1.5 1.5 0 0 1-3 0V4.5A1.5 1.5 0 0 1 12 3z" fill="#0057B7" />
+    <path d="M19.5 12a1.5 1.5 0 0 1 1.5 1.5v6.5a1.5 1.5 0 0 1-3 0v-6.5a1.5 1.5 0 0 1 1.5-1.5z" fill="#FF0000" />
+  </svg>
+);
 
-const timeline = [
-  {
-    year: "May 2026 – Present",
-    label: "AI Engineering Intern | ZapplyX",
-    summary:
-      "Architected and deployed a production AI workflow platform serving 30+ users, automating startup discovery, enrichment, LLM personalization, resume tailoring, and outreach across 12,000+ founder profiles.",
-    bullets: [
-      "Architected and deployed a production AI workflow platform serving 30+ users, automating startup discovery, enrichment, LLM personalization, resume tailoring, and outreach across 12,000+ founder profiles.",
-      "Built a scalable multi-agent system using FastAPI, Redis, Celery, MongoDB, and Playwright, coordinating 6 autonomous agents via asynchronous queues, retries, and concurrency control for reliable parallel execution.",
-      "Engineered production AI infrastructure with multi-provider enrichment, SMTP verification, Prometheus monitoring, structured logging, and trace IDs, strengthening workflow reliability and observability.",
-    ],
-    metrics: ["zapplyx.com Live", "30+ Active Users", "12,000+ Profiles", "6 Autonomous AI Agents"],
-  },
-  {
-    year: "Jan 2026 – Present",
-    label: "Research Project | Hardware Resource Optimization & Digital Watermarking",
-    summary:
-      "Formulated a metaheuristic hardware optimization framework for DSP data-flow graphs across 34 DSP benchmarks, implementing 7 metaheuristic algorithms and 12 security algorithms for digital signature embedding.",
-    bullets: [
-      "Formulated a metaheuristic hardware optimization framework for DSP data-flow graphs, integrating scheduling, register allocation, graph coloring, and area-latency analysis across 34 DSP benchmarks.",
-      "Implemented and benchmarked 7 metaheuristic algorithms: PSO, GWO, ACO, BFO, Firefly, GA, and KH, using a unified pipeline for hardware resource optimization.",
-      "Extended the framework with 12 security algorithms for digital signature embedding, balancing hardware cost and watermark security with post-embedding register conflict resolution.",
-    ],
-    metrics: ["34 DSP Benchmarks", "7 Metaheuristic Algos", "12 Security Algorithms", "Conflict Resolution"],
-  },
-  {
-    year: "Dec 2025 – Jan 2026",
-    label: "Team Leader | Agentic AI Project, EY Techathon (Round 2 Qualifier)",
-    summary:
-      "Ranked among the top 4,000 teams out of approximately 2 lakh registered participants, leading a 5-member team to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows.",
-    bullets: [
-      "Ranked among the top 4,000 teams out of approximately 2 lakh registered participants, leading a 5-member team to build Stratabid™, an agentic RFP orchestration system with 4 parallel agent workflows.",
-      "Developed a hybrid retrieval and evaluation pipeline combining FAISS vector search with weighted rule-based scoring across 100+ specification parameters, reducing bid turnaround time by up to 80%.",
-    ],
-    metrics: ["Top 4,000 / 2 Lakh+", "4 Parallel Agents", "80% TAT Reduction", "FAISS + Rule Scoring"],
-  },
-  {
-    year: "2024 – 2025",
-    label: "Executive | CODAME IIIT Bhopal",
-    summary:
-      "Organized competitive coding contests and technical workshops for 550+ students, increasing multi-campus participation by 50% across 10+ engineering institutes.",
-    bullets: [
-      "Demonstrated leadership as Executive, CODAME IIIT Bhopal, organizing coding contests and technical workshops for 550+ students and increasing participation by 50% through outreach across 10+ institutes.",
-    ],
-    metrics: ["550+ Students", "10+ Institutes", "50% Participation Growth"],
-  },
-];
+const XTwitterIcon = ({ className = "h-4 w-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
-const certificates = [
-  {
-    id: "amazon-ml",
-    title: "Amazon ML Summer School 2026",
-    issuer: "Amazon",
-    type: "Letter of Acknowledgement",
-    dates: "July 11–26 & August 1–2, 2026 (Issued Aug 18, 2026)",
-    credentialType: "Flagship Machine Learning Program",
-    highlight: "Top 2.5% Nationwide Selection (3,000 selected / 1.34 Lakh+ Applicants)",
-    description:
-      "Attended Amazon ML Summer School 2026, an integrated learning program focused on foundational & advanced Machine Learning concepts, LLMs, Neural Networks, and Applied AI systems.",
-    recipient: "Devansh Shukla",
-    institution: "Indian Institute of Information Technology (IIIT), Bhopal",
-    tag: "Amazon Flagship",
-    image: "/certificates/amazon_ml_summer_school_2026.png",
-    pdfUrl: "/certificates/pdf/amazon_ml_summer_school_2026.pdf",
-    verified: true,
-  },
-  {
-    id: "et-ai",
-    title: "ET-AI Hackathon 2026 — Semi-Finalist",
-    issuer: "The Economic Times Digital",
-    type: "Certificate of Participation / Semi-Finalist",
-    dates: "7th May 2026",
-    credentialType: "National AI Hackathon",
-    highlight: "Semi-Finalist Commendation by Puneet Kukreja (Business Head, ET Digital)",
-    description:
-      "Successfully emerged as a Semi-Finalist in the ET-AI Hackathon 2026. Commended for innovation, collaborative spirit, and commitment to building meaningful AI solutions throughout the competition.",
-    recipient: "Devansh Shukla",
-    institution: "Indian Institute of Information Technology (IIIT), Bhopal",
-    tag: "The Economic Times",
-    image: "/certificates/et_ai_hackathon_2026.png",
-    pdfUrl: "/certificates/pdf/et_ai_hackathon_2026.pdf",
-    verified: true,
-  },
-  {
-    id: "ey-techathon",
-    title: "EY Techathon 2026 (Round 2 Qualifier)",
-    issuer: "Ernst & Young (EY) & Unstop",
-    type: "Certificate of Appreciation",
-    dates: "Dec 2025 – Jan 2026",
-    credentialType: "Round 2 Detailed Presentation Qualifier",
-    highlight: "Top 4,000 Teams Nationwide out of ~2 Lakh Registered Participants",
-    description:
-      "Awarded for advancing to Round 2: Detailed Presentation Submission as Team Leader for Team Dna paradox, architecting Stratabid™ agentic RFP orchestration system.",
-    recipient: "Devansh Shukla",
-    institution: "Indian Institute of Information Technology (IIIT), Bhopal",
-    tag: "EY & Unstop",
-    image: "/certificates/ey_techathon_2026.png",
-    pdfUrl: "/certificates/pdf/ey_techathon_2026.pdf",
-    verified: true,
-  },
-  {
-    id: "tata-imagination",
-    title: "Tata Imagination Challenge — Semi-Finalist",
-    issuer: "Tata Group & Unstop",
-    type: "Certificate of Appreciation",
-    dates: "2025 – 2026",
-    credentialType: "#ImagineThat Idea Pitch",
-    highlight: "Top 5,000 Nationwide Participants out of 10 Lakh+ Registered Candidates",
-    description:
-      "Participated in the #ImagineThat Idea Pitch organized by the Tata Group as Team dshukl2004, qualifying among the Top 5,000 national semi-finalists in strategy and innovation.",
-    recipient: "Devansh Shukla",
-    institution: "Indian Institute of Information Technology, Bhopal (IIIT Bhopal)",
-    tag: "Tata Group",
-    image: "/certificates/tata_imagination_challenge_2026.png",
-    pdfUrl: "/certificates/pdf/tata_imagination_challenge_2026.pdf",
-    verified: true,
-  },
-  {
-    id: "cohere-ml",
-    title: "Cohere Labs ML Summer School 2026",
-    issuer: "Cohere Labs & Credsverse",
-    type: "Certificate of Participation",
-    dates: "Summer 2026",
-    credentialType: "LLMs & Applied NLP",
-    highlight: "Verified Digital Credential (ID: 252675e3-526c-4678-810d)",
-    description:
-      "Completed hands-on machine learning sessions on transformer architectures, embeddings, vector search, and retrieval-augmented generation (RAG) with Cohere Labs.",
-    recipient: "Devansh Shukla",
-    institution: "IIIT Bhopal",
-    tag: "Cohere Labs",
-    verified: true,
-    verificationUrl: "https://credsverse.com/credentials/252675e3-526c-4678-810d-d560ec4d73b6",
-    verificationText: "Verify on Credsverse",
-  },
-];
+import {
+  INITIAL_GITHUB_CONTRIBUTIONS,
+  INITIAL_GITHUB_TOTAL,
+  INITIAL_LEETCODE_CALENDAR,
+  INITIAL_LEETCODE_STATS,
+} from "./activityData";
 
-const achievements = [
-  {
-    title: "Competitive Programming Rigor",
-    text: "Secured CodeChef 4-star (1824), Codeforces Specialist (1506), and LeetCode Knight (1902), conquering 1000+ algorithmic challenges and ranking 180th, 336th, 406th on CodeChef (28k+), 608th on Codeforces (40k+), and 321st on LeetCode (30k+).",
-    badge: "1902 LC | 1824 CC | 1506 CF",
-  },
-  {
-    title: "Amazon ML Summer School 2026",
-    text: "Selected among 3,000 students from over 1.34 lakh applicants nationwide (Top 2.5%) for Amazon's flagship machine learning program covering deep learning architectures, LLMs, and applied AI.",
-    badge: "Top 2.5% Nationwide",
-  },
-  {
-    title: "Semi-Finalist, ET-AI Hackathon 2026",
-    text: "Successfully emerged as a Semi-Finalist in the ET-AI Hackathon 2026 organized by The Economic Times Digital, commended for building meaningful real-world AI solutions.",
-    badge: "National Semi-Finalist",
-  },
-  {
-    title: "EY Techathon (Round 2 Qualifier)",
-    text: "Ranked among top 4,000 teams out of approximately 2 lakh registered participants, leading a 5-member team (Team Dna paradox) to build Stratabid™ agentic RFP orchestration system.",
-    badge: "Top 4,000 / 2 Lakh+",
-  },
-  {
-    title: "Semi-Finalist, Tata Imagination Challenge",
-    text: "Ranked among the Top 5,000 participants out of 10 lakh+ nationwide applicants in India's flagship innovation and strategy competition (#ImagineThat Idea Pitch).",
-    badge: "Top 5,000 / 10 Lakh+",
-  },
-  {
-    title: "Leadership — Executive, CODAME IIIT Bhopal",
-    text: "Organized competitive coding contests and technical workshops for 550+ students, increasing multi-campus participation by 50% across 10+ engineering institutes.",
-    badge: "550+ Engineers",
-  },
-  {
-    title: "Cohere Labs ML Summer School 2026",
-    text: "Completed hands-on machine learning curriculum on Large Language Models, embeddings, and generative AI systems with certified credential verification.",
-    badge: "Verified Credential",
-    link: "https://credsverse.com/credentials/252675e3-526c-4678-810d-d560ec4d73b6",
-    linkText: "View on Credsverse",
-  },
-];
-
-function CertificateModal({ cert, onClose }) {
-  if (!cert) return null;
-
-  return (
-    <AnimatePresence>
-      <div
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          transition={{ duration: 0.25 }}
-          className="relative w-full max-w-3xl my-8 rounded-2xl border border-zinc-700 bg-zinc-950 p-5 sm:p-7 shadow-2xl overflow-hidden"
-        >
-          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
-
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 rounded-full border border-zinc-800 bg-zinc-900/80 p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 transition z-10"
-          >
-            <X className="h-4 w-4" />
-          </button>
-
-          <div className="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-widest mb-2">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Verified Credential Record</span>
-          </div>
-
-          <div className="border-b border-zinc-800 pb-4 pt-1">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="rounded-full bg-zinc-900 border border-zinc-800 px-3 py-1 font-mono text-xs text-zinc-300">
-                {cert.tag}
-              </span>
-              <span className="font-mono text-xs text-zinc-500">{cert.dates}</span>
-            </div>
-            <h2 className="mt-2 text-xl sm:text-2xl font-bold text-white tracking-tight">{cert.title}</h2>
-            <p className="mt-1 text-sm font-semibold text-emerald-400">{cert.issuer}</p>
-          </div>
-
-          {/* Certificate Official Image Rendering */}
-          {cert.image ? (
-            <div className="mt-4 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg">
-              <div className="relative group">
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className="w-full max-h-[380px] object-contain bg-zinc-950 p-2 transition group-hover:opacity-95"
-                />
-                <a
-                  href={cert.image}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-950/90 px-3 py-1.5 font-mono text-xs text-zinc-200 shadow-md backdrop-blur hover:bg-zinc-900 hover:text-emerald-400 transition"
-                >
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  <span>Open Full Image</span>
-                </a>
-              </div>
-            </div>
-          ) : null}
-
-          <div className="mt-4 rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-4 space-y-3">
-            <div className="flex flex-wrap items-center justify-between border-b border-zinc-800/60 pb-2.5 gap-2">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Awarded To</p>
-                <p className="text-sm sm:text-base font-bold text-zinc-100">{cert.recipient}</p>
-              </div>
-              <div className="text-left sm:text-right">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Institution</p>
-                <p className="text-xs text-zinc-300">{cert.institution}</p>
-              </div>
-            </div>
-
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Highlight & Distinction</p>
-              <p className="mt-0.5 text-xs sm:text-sm font-medium text-amber-300">{cert.highlight}</p>
-            </div>
-
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Official Citation</p>
-              <p className="mt-0.5 text-xs leading-relaxed text-zinc-300">{cert.description}</p>
-            </div>
-          </div>
-
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-              <BadgeCheck className="h-4 w-4 text-emerald-400" />
-              <span>Authenticity verified in resume archive</span>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {cert.verificationUrl ? (
-                <a
-                  href={cert.verificationUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-emerald-500 bg-emerald-500 px-3.5 py-1.5 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition"
-                >
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  <span>{cert.verificationText || "Verify Credential"}</span>
-                </a>
-              ) : null}
-              {cert.pdfUrl ? (
-                <a
-                  href={cert.pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/40 bg-amber-500/10 px-3.5 py-1.5 text-xs font-medium text-amber-300 hover:bg-amber-500/20 transition"
-                >
-                  <FileText className="h-3.5 w-3.5 text-amber-400" />
-                  <span>View Official PDF</span>
-                </a>
-              ) : null}
-              {cert.image ? (
-                <a
-                  href={cert.image}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition"
-                >
-                  <ExternalLink className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>Full Image</span>
-                </a>
-              ) : null}
-              <button
-                onClick={onClose}
-                className="rounded-md border border-zinc-700 bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
-  );
-}
-
-function ResumeModal({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
-  return (
-    <AnimatePresence>
-      <div
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md overflow-hidden"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 15 }}
-          transition={{ duration: 0.25 }}
-          className="relative flex flex-col w-full max-w-5xl h-[92vh] rounded-2xl border border-zinc-700 bg-zinc-950 p-4 sm:p-6 shadow-2xl overflow-hidden"
-        >
-          {/* Subtle background glow */}
-          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
-
-          {/* Modal Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 pb-3.5 mb-3 flex-none">
-            <div className="flex items-center gap-2.5">
-              <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-2 text-emerald-400">
-                <FileText className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base sm:text-lg font-bold text-white tracking-tight font-mono">
-                    Devansh_Shukla_Resume
-                  </h2>
-                  <span className="hidden sm:inline-block rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] uppercase text-emerald-400 border border-emerald-500/20">
-                    Latest Verified
-                  </span>
-                </div>
-                <p className="text-xs text-zinc-400 font-mono">
-                  AI Engineering Intern @ ZapplyX • B.Tech CSE (IIIT Bhopal)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <a
-                href="/resume/Devansh_Shukla_Resume.pdf"
-                download="Devansh_Shukla_Resume.pdf"
-                className="inline-flex items-center gap-1.5 rounded-md border border-emerald-500 bg-emerald-500 px-3.5 py-1.5 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition shadow-[0_0_12px_rgba(16,185,129,0.25)]"
-              >
-                <Download className="h-3.5 w-3.5" />
-                <span>Download</span>
-              </a>
-              <a
-                href="/resume/Devansh_Shukla_Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition"
-              >
-                <ExternalLink className="h-3.5 w-3.5 text-emerald-400" />
-                <span>New Tab</span>
-              </a>
-              <button
-                onClick={onClose}
-                className="rounded-full border border-zinc-800 bg-zinc-900 p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 transition ml-1 cursor-pointer"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Modal Body - PDF Viewer */}
-          <div className="relative flex-1 w-full h-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-inner">
-            <object
-              data="/resume/Devansh_Shukla_Resume.pdf#toolbar=1"
-              type="application/pdf"
-              className="w-full h-full rounded-xl"
-            >
-              <div className="flex flex-col items-center justify-center h-full p-6 text-center overflow-y-auto">
-                <img
-                  src="/resume/Devansh_Shukla_Resume.png"
-                  alt="Devansh_Shukla_Resume"
-                  className="max-h-[60vh] object-contain rounded-lg shadow-lg border border-zinc-800"
-                />
-                <a
-                  href="/resume/Devansh_Shukla_Resume.pdf"
-                  download="Devansh_Shukla_Resume.pdf"
-                  className="mt-4 inline-flex items-center gap-2 rounded-md border border-emerald-500 bg-emerald-500 px-4 py-2 text-xs font-semibold text-zinc-950"
-                >
-                  <Download className="h-4 w-4" />
-                  Download Devansh_Shukla_Resume.pdf
-                </a>
-              </div>
-            </object>
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
-  );
-}
-
-function App() {
-  const [selectedCert, setSelectedCert] = useState(null);
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("portfolio_accent") || "emerald";
+// Format real GitHub daily array into 7-day columns
+function formatGitHubWeeks(contributions) {
+  if (!contributions || contributions.length === 0) return [];
+  const weeks = [];
+  let currentWeek = [];
+  contributions.forEach((day) => {
+    currentWeek.push(day);
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
   });
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  if (currentWeek.length > 0) weeks.push(currentWeek);
+  return weeks;
+}
+
+// Format real LeetCode submissionCalendar timestamp object into 52 weeks
+function formatLeetCodeWeeks(submissionCalendar) {
+  const cal =
+    typeof submissionCalendar === "string"
+      ? JSON.parse(submissionCalendar)
+      : submissionCalendar || {};
+  const days = [];
+  const now = new Date();
+  for (let i = 363; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    d.setHours(0, 0, 0, 0);
+    const dateStr = d.toISOString().split("T")[0];
+    const timestampSec = Math.floor(d.getTime() / 1000);
+
+    let count = 0;
+    for (const [ts, c] of Object.entries(cal)) {
+      const tsNum = Number(ts);
+      if (Math.abs(tsNum - timestampSec) < 43200) {
+        count = Number(c);
+        break;
+      }
+    }
+    const level =
+      count === 0 ? 0 : count <= 2 ? 1 : count <= 5 ? 2 : count <= 9 ? 3 : 4;
+    days.push({ date: dateStr, count, level });
+  }
+
+  const weeks = [];
+  let currentWeek = [];
+  days.forEach((day) => {
+    currentWeek.push(day);
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+  });
+  if (currentWeek.length > 0) weeks.push(currentWeek);
+  return weeks;
+}
+
+export default function App() {
+  const [activeRoute, setActiveRoute] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("emerald");
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formStatus, setFormStatus] = useState("idle"); // "idle" | "submitting" | "success" | "error"
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+    setFormStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${SOCIAL_LINKS.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          _subject: `Portfolio Message from ${formData.name.trim()}`,
+          _captcha: "false",
+          _template: "table",
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok || data.success === "true" || data.success === true) {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => {
+          setFormStatus("idle");
+        }, 5000);
+      } else {
+        throw new Error(data.message || "Direct delivery could not be completed.");
+      }
+    } catch (err) {
+      console.warn("Direct transmission error:", err);
+      setFormStatus("error");
+      setErrorMessage("Direct delivery could not connect. You can retry or send via your email client below.");
+    }
+  };
+
+  const handleFallbackMailto = () => {
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name || "Portfolio Visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    window.open(`mailto:${SOCIAL_LINKS.email}?subject=${subject}&body=${body}`, "_blank");
+  };
+
+  // Real live GitHub & LeetCode Activity States (Hydrated with exact data)
+  const [githubStats, setGithubStats] = useState(() => ({
+    total: INITIAL_GITHUB_TOTAL,
+    streak: 4,
+    weeks: formatGitHubWeeks(INITIAL_GITHUB_CONTRIBUTIONS),
+    isLoading: false,
+  }));
+
+  const [leetCodeStats, setLeetCodeStats] = useState(() => ({
+    ...INITIAL_LEETCODE_STATS,
+    weeks: formatLeetCodeWeeks(INITIAL_LEETCODE_CALENDAR),
+    isLoading: false,
+  }));
+
+  // Fetch Live Real Data on mount
+  useEffect(() => {
+    // 1. Fetch Real Live GitHub Activity
+    fetch("https://github-contributions-api.jogruber.de/v4/thedevanshshukla?y=last")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.contributions && data.contributions.length > 0) {
+          const weeks = formatGitHubWeeks(data.contributions);
+          const total = data.total?.lastYear ?? data.total?.[new Date().getFullYear()] ?? INITIAL_GITHUB_TOTAL;
+          let streak = 0;
+          const reversed = [...data.contributions].reverse();
+          for (const d of reversed) {
+            if (d.count > 0) streak++;
+            else break;
+          }
+          setGithubStats({
+            total,
+            streak: Math.max(streak, 1),
+            weeks,
+            isLoading: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn("Using offline snapshot for GitHub:", err);
+      });
+
+    // 2. Fetch Real Live LeetCode Profile & Activity
+    fetch("https://alfa-leetcode-api.onrender.com/userProfile/int_ro_ve_rt")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          const acStats = data.matchedUserStats?.acSubmissionNum || [];
+          const allCount = acStats.find((s) => s.difficulty === "All")?.count || INITIAL_LEETCODE_STATS.totalSolved;
+          const easyCount = acStats.find((s) => s.difficulty === "Easy")?.count || INITIAL_LEETCODE_STATS.easySolved;
+          const mediumCount = acStats.find((s) => s.difficulty === "Medium")?.count || INITIAL_LEETCODE_STATS.mediumSolved;
+          const hardCount = acStats.find((s) => s.difficulty === "Hard")?.count || INITIAL_LEETCODE_STATS.hardSolved;
+
+          let weeks = [];
+          if (data.submissionCalendar) {
+            weeks = formatLeetCodeWeeks(data.submissionCalendar);
+          }
+
+          setLeetCodeStats((prev) => ({
+            ...prev,
+            totalSolved: allCount,
+            easySolved: easyCount,
+            mediumSolved: mediumCount,
+            hardSolved: hardCount,
+            weeks: weeks.length > 0 ? weeks : prev.weeks,
+            isLoading: false,
+          }));
+        }
+      })
+      .catch((err) => {
+        console.warn("Using offline snapshot for LeetCode:", err);
+      });
+
+    // 3. Fetch Live LeetCode Contest Stats
+    fetch("https://alfa-leetcode-api.onrender.com/int_ro_ve_rt/contest")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.contestRating) {
+          setLeetCodeStats((prev) => ({
+            ...prev,
+            rating: Math.round(data.contestRating),
+            topPercentage: data.contestTopPercentage || prev.topPercentage,
+            globalRanking: data.contestGlobalRanking || prev.globalRanking,
+            badge: data.contestBadges?.name || "Knight",
+          }));
+        }
+      })
+      .catch((err) => {
+        console.warn("Using offline snapshot for LeetCode contest:", err);
+      });
+  }, []);
+
+  // Live Clock
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("portfolio_accent", theme);
   }, [theme]);
 
+  // Sync hash routing
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "").toLowerCase();
+      if (!hash || hash === "home") {
+        setActiveRoute("home");
+      } else if (NAV_ROUTES.some((r) => r.id === hash)) {
+        setActiveRoute(hash);
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  const navigateTo = (routeId) => {
+    setActiveRoute(routeId);
+    window.location.hash = routeId === "home" ? "" : routeId;
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const copyEmailToClipboard = () => {
+    navigator.clipboard.writeText(SOCIAL_LINKS.email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const projectsList = [
+    // Flagship Top 4 Projects (Kept at top)
+    {
+      id: "voicehire",
+      title: "VoiceHire",
+      year: "2026",
+      tags: ["FastAPI", "WebSockets", "Deepgram STT", "ElevenLabs", "LiveKit", "Celery", "MongoDB"],
+      desc: "Full-duplex autonomous conversational AI interviewing platform with sub-150ms turn-taking latency. Streams audio bidirectionally over WebSockets, orchestrates dynamic evaluation rubrics, processes asynchronous candidate reports via Celery worker pools, and benchmarks candidate responses deterministically.",
+      demoUrl: "https://voice-hire-devansh-shuklas-projects.vercel.app/",
+      sourceUrl: "https://github.com/thedevanshshukla/Voice_Hire",
+    },
+    {
+      id: "courtroom",
+      title: "Courtroom Trading System",
+      year: "2026",
+      tags: ["Python", "Multi-Agent", "Algorithmic Trading", "Backtesting", "FastAPI", "Docker", "AsyncIO"],
+      desc: "Adversarial multi-agent quantitative validation engine. Simulates courtroom debates between bullish and bearish analyst agents, arbitrated by risk and compliance judges to stress-test trading hypotheses before executing automated orders with strict margin and risk guardrails.",
+      demoUrl: "https://courtroom-trading.vercel.app/",
+      sourceUrl: "https://github.com/thedevanshshukla/courtroom-trading/",
+    },
+    {
+      id: "stratabid",
+      title: "Stratabid™ (EY Techathon)",
+      year: "2025",
+      tags: ["Python", "FAISS Vector DB", "LangChain", "FastAPI", "Multi-Agent FSM", "Docker"],
+      desc: "Agentic RFP orchestration system with 4 parallel agent workflows. Built a hybrid retrieval pipeline combining FAISS vector search with weighted rule-based scoring across 100+ specification parameters, reducing bid turnaround time by up to 80%.",
+      demoUrl: null,
+      sourceUrl: "https://github.com/thedevanshshukla/Stratabid",
+    },
+    {
+      id: "glidepay",
+      title: "GlidePAY",
+      year: "2025",
+      tags: ["Flask", "React", "MongoDB", "REST API", "Payment Gateway"],
+      desc: "Custom UPI-style peer-to-peer payment app serving active users. Implemented MongoDB transactions and session-based authentication to support secure payment flows, reducing API latency by 35% via route optimizations.",
+      demoUrl: "https://glide-pay-payment-gateway-51l4.vercel.app/",
+      sourceUrl: "https://github.com/thedevanshshukla/GlidePAY-paymentGateway",
+    },
+
+    // Additional Public GitHub Repositories
+    {
+      id: "et-hackathon",
+      title: "ET AI Cost Intelligence (ET Hackathon)",
+      year: "2026",
+      tags: ["Python", "FastAPI", "FinOps", "Cost Intelligence", "Automation", "Render"],
+      desc: "AI-powered cost intelligence and enterprise approval automation engine built for The Economic Times AI Hackathon. Integrates multi-tiered approval workflows, anomaly detection on budget deviations, and comprehensive audit telemetry.",
+      demoUrl: "https://et-hackathon-j1c2.onrender.com/",
+      sourceUrl: "https://github.com/thedevanshshukla/et-hackathon",
+    },
+    {
+      id: "safetyai",
+      title: "SafetyAI — Industrial Hazard Intelligence",
+      year: "2026",
+      tags: ["Multi-Agent AI", "IoT Telemetry", "SCADA", "Predictive Analytics", "JavaScript"],
+      desc: "Multi-agent industrial safety intelligence system for hazard prediction, plant sensor anomaly detection, and automated operational decision support across critical infrastructure and manufacturing lines.",
+      demoUrl: null,
+      sourceUrl: "https://github.com/thedevanshshukla/safetyai",
+    },
+    {
+      id: "aegis-crisis",
+      title: "Aegis Crisis Intelligence System",
+      year: "2025",
+      tags: ["Multi-Agent AI", "Crisis Management", "Disaster Response", "Decision Support", "Autonomous Systems"],
+      desc: "Decentralized multi-agent crisis intelligence engine for adaptive emergency resource allocation, real-time evacuation routing, and automated disaster-response decision support under extreme uncertainty.",
+      demoUrl: null,
+      sourceUrl: "https://github.com/thedevanshshukla/aegis-crisis-system",
+    },
+    {
+      id: "smart-expense-tracker",
+      title: "Smart Expense Tracker",
+      year: "2025",
+      tags: ["Python", "Machine Learning", "Personal Finance", "Analytics", "Data Visualization"],
+      desc: "AI-enhanced personal finance and expense tracking engine featuring automatic transaction categorization, spending pattern predictive analytics, budget threshold alerts, and multi-format reporting.",
+      demoUrl: null,
+      sourceUrl: "https://github.com/thedevanshshukla/smart-expense-tracker",
+    },
+    {
+      id: "magic-pin",
+      title: "MagicPin Messaging & Engagement Engine",
+      year: "2025",
+      tags: ["FastAPI", "Python", "Rule-based Engine", "Conversation AI", "Trigger Automation"],
+      desc: "Deterministic high-throughput FastAPI messaging engine built for trigger-based business customer engagement, automated workflow routing, and intelligent reply handling.",
+      demoUrl: null,
+      sourceUrl: "https://github.com/thedevanshshukla/magic-pin",
+    },
+    {
+      id: "book-review",
+      title: "BookReview — MERN Community Platform",
+      year: "2025",
+      tags: ["React", "Node.js", "Express", "MongoDB", "JWT Auth", "REST API"],
+      desc: "Full-stack community platform for book discovery, verified user reviews, rating analytics, and collection curation with granular access controls and responsive UI.",
+      demoUrl: "https://book-review-flame.vercel.app/",
+      sourceUrl: "https://github.com/thedevanshshukla/book-review",
+    },
+  ];
+
+  const experienceList = [
+    {
+      role: "AI Engineering Intern",
+      org: "ZapplyX",
+      period: "Jan 2026 – Present",
+      type: "Internship",
+      link: "https://www.zapplyx.com",
+      summary:
+        "Building core backend infrastructure, low-latency audio processing pipelines, and asynchronous Celery worker systems for production AI agent applications.",
+      stack: [
+        "FastAPI",
+        "Celery",
+        "Redis",
+        "MongoDB",
+        "Docker",
+        "Real-Time Audio Pipelines",
+        "Whisper",
+        "LLM Orchestration",
+      ],
+      bullets: [
+        "Designed and scaled asynchronous worker infrastructure using Celery & Redis to handle high-concurrency audio processing pipelines with zero blocking on core API threads.",
+        "Architected high-throughput FastAPI microservices and optimized MongoDB schemas for real-time AI conversational sessions and analytics storage.",
+        "Integrated real-time speech-to-text (Whisper) and generative LLM orchestration layers to support autonomous interview evaluations.",
+        "Implemented structured telemetry and error-handling mechanisms that boosted system reliability and eliminated worker task starvation.",
+      ],
+    },
+    {
+      role: "Undergraduate Researcher – Hardware Security & Digital IP Watermarking",
+      org: "IIIT Bhopal",
+      period: "Jan 2026 – Present",
+      type: "Research",
+      link: "https://iiitbhopal.ac.in/home",
+      summary:
+        "Conducted research on digital IP protection and fault-tolerant hardware watermarking algorithms for digital signal architectures, simulating gate-level fault tolerance and low-power VLSI design.",
+      stack: ["Verilog", "ModelSim", "VLSI Design", "Hardware Security", "FPGA", "Digital Signal Processing"],
+      bullets: [
+        "Researched and modeled robust digital IP watermarking techniques for ASIC and FPGA hardware architectures.",
+        "Simulated gate-level fault tolerance and zero-degradation watermark embedding algorithms using ModelSim and Xilinx Vivado.",
+        "Evaluated silicon area overhead, critical path timing, and power consumption across standard benchmark circuits.",
+      ],
+    },
+  ];
+
+  const workingOnList = [
+    {
+      id: "voicehire",
+      title: "VoiceHire",
+      subtitle: "Full-Duplex Conversational Audio AI Engine",
+      githubUrl: "https://github.com/thedevanshshukla/Voice_Hire",
+      liveUrl: "https://voice-hire-devansh-shuklas-projects.vercel.app/",
+      desc: "An enterprise conversational voice platform that autonomously conducts adaptive system design and resume technical interviews with sub-150ms latency.",
+      howItWorks: [
+        "Sub-150ms turn-taking architecture with real-time interruptibility (Voice Activity Detection).",
+        "Streaming Speech-to-Text via Deepgram Nova-2 with speculative token generation.",
+        "Dynamic evaluation rubrics and automated candidate response benchmarking.",
+        "Asynchronous telemetry processing and report compilation via Celery worker pools.",
+      ],
+      techStack: [
+        { label: "Backend", val: "FastAPI, Python, Celery, MongoDB" },
+        { label: "Streaming", val: "WebSockets, WebRTC, LiveKit" },
+        { label: "AI", val: "Deepgram Nova-2, OpenAI GPT-4o, ElevenLabs" },
+        { label: "Infra", val: "Docker, Redis, Vercel" },
+      ],
+    },
+    {
+      id: "courtroom",
+      title: "Courtroom Trading",
+      subtitle: "Adversarial Multi-Agent Trading System",
+      githubUrl: "https://github.com/thedevanshshukla/courtroom-trading",
+      liveUrl: "https://courtroom-trading.vercel.app/",
+      desc: "An explainable multi-agent quantitative decision engine simulating courtroom debates between bullish, bearish, and judge agents to validate trading strategies.",
+      howItWorks: [
+        "Bullish and Bearish analyst agents present adversarial market evidence and momentum signals.",
+        "Risk and compliance Judge agents arbitrate signals and enforce risk guardrails.",
+        "Real-time order book simulation with liquidity slippage modeling.",
+        "Interactive stream of structured agent reasoning traces and confidence scores.",
+      ],
+      techStack: [
+        { label: "Backend", val: "Python, FastAPI, AsyncIO, LangGraph" },
+        { label: "Data", val: "Market Feed APIs, PostgreSQL, Pandas, NumPy" },
+        { label: "AI", val: "Multi-Agent Reasoning, Claude 3.5, OpenAI" },
+        { label: "Infra", val: "Docker, Vercel" },
+      ],
+    },
+    {
+      id: "stratabid",
+      title: "Stratabid™",
+      subtitle: "Agentic RFP & Tender Intelligence Platform",
+      githubUrl: "https://github.com/thedevanshshukla/Stratabid",
+      liveUrl: null,
+      desc: "A multi-agent RFP orchestration engine built for EY Techathon 5.0, automating complex enterprise bid evaluation, compliance checks, and document synthesis.",
+      howItWorks: [
+        "Four-node agent orchestration workflow: Parser, Retriever, Scorer, and Assembler.",
+        "Hybrid retrieval combining FAISS vector search with weighted rule scoring across 100+ parameters.",
+        "Automated compliance risk matrix and fail-safe bid proposal drafting.",
+        "Reduced enterprise tender turnaround time by up to 80%.",
+      ],
+      techStack: [
+        { label: "Backend", val: "Python, FastAPI, LangChain, FAISS Vector DB" },
+        { label: "Multi-Agent", val: "StateGraph FSM, Pydantic Structured Output" },
+        { label: "AI", val: "OpenAI GPT-4, Document Embeddings" },
+        { label: "Infra", val: "Docker, Microservices" },
+      ],
+    },
+    {
+      id: "et-hackathon",
+      title: "ET AI Cost Intelligence",
+      subtitle: "Autonomous FinOps & Approval Engine",
+      githubUrl: "https://github.com/thedevanshshukla/et-hackathon",
+      liveUrl: "https://et-hackathon-j1c2.onrender.com/",
+      desc: "An intelligent financial governance system built for The Economic Times AI Hackathon to automate expense audits and multi-tier budget approvals.",
+      howItWorks: [
+        "Automated invoice OCR and policy violation anomaly detection.",
+        "Multi-tier dynamic approval routing based on expense velocity and risk scores.",
+        "Real-time budget forecasting and department expenditure telemetry.",
+        "Audit-ready ledger generation with verifiable cryptographic verification.",
+      ],
+      techStack: [
+        { label: "Backend", val: "Python, FastAPI, SQLite / PostgreSQL" },
+        { label: "AI", val: "Vision-LLM Extraction, Anomaly Detection" },
+        { label: "Frontend", val: "React, Tailwind CSS" },
+        { label: "Infra", val: "Render, Docker" },
+      ],
+    },
+  ];
+
+  const educationList = [
+    {
+      period: "September 2023 – June 2027",
+      institution: "Indian Institute of Information Technology, Bhopal",
+      degree: "Bachelor of Technology in Computer Science & Engineering (CSE)",
+      score: "GPA: 8.44",
+      courses: [
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "DBMS",
+        "Operating Systems",
+        "Computer Networks",
+        "Theory of Computation",
+      ],
+      link: "https://iiitbhopal.ac.in/home",
+    },
+    {
+      period: "April 2021 – March 2023",
+      institution: "DAV Public School",
+      degree: "Senior Secondary High School (12th)",
+      score: "Percentage: 92.8%",
+      courses: ["Physics", "Chemistry", "Maths", "English", "Computer Science"],
+      link: "https://davpvghaziabad.edu.in/",
+    },
+    {
+      period: "April 2011 – March 2021",
+      institution: "ST. TERESA’S CONVENT SCHOOL",
+      degree: "Primary High School (10th)",
+      score: "Percentage: 90.2%",
+      courses: [],
+      link: "https://www.stteresaconventschool.org/",
+    },
+  ];
+
+  const keyAchievementsList = [
+    {
+      icon: Trophy,
+      text: "Achieved Top 2.5% nationwide selection in Amazon ML Summer School 2026 out of 1.34 Lakh+ applicants.",
+    },
+    {
+      icon: Trophy,
+      text: "National Semifinalist in EY Techathon 5.0 (Stratabid™) — Team Lead for 5-member team, placing in Top 4,000 out of 2 Lakh+ teams.",
+    },
+    {
+      icon: Award,
+      text: "National Semifinalist in Flipkart GRiD 8.0 (SDE Track) — ranked among Top 2,000 candidates out of 1.65+ Lakh participants nationwide.",
+    },
+    {
+      icon: Code2,
+      text: "Competitive Programming: Knight on LeetCode (1902 rating, Top 3.9%), 4-Star on CodeChef (1824 peak, Div 1), Specialist on Codeforces (1506). Solved 760+ DSA problems across platforms.",
+    },
+    {
+      icon: Terminal,
+      text: "National Finalist in ET AI Hackathon & Campus Stars 2026, selected among India's top engineering talents after multi-stage evaluations.",
+    },
+    {
+      icon: BookOpen,
+      text: "National Semifinalist in Tata Imagination Challenge 2025 across prestigious business problem-solving case competitions.",
+    },
+  ];
+
+  const honorsList = [
+    {
+      id: "amazon-ml",
+      title: "Amazon ML Summer School",
+      org: "Amazon",
+      badge: "Top 2.5% Nationwide Selection",
+      desc: "Selected among top 3,000 nationwide out of 1.34 Lakh+ applicants for Amazon's flagship Machine Learning program.",
+      pdfUrl: "/certificates/pdf/amazon_ml_summer_school_2026.pdf",
+      imgUrl: "/certificates/amazon_ml_summer_school_2026.png",
+      date: "2026",
+    },
+    {
+      id: "et-campus",
+      title: "ET AI Hackathon & Campus Stars",
+      org: "The Economic Times",
+      badge: "National Finalist",
+      desc: "Selected among India's brightest engineering talents after multi-stage aptitude, logic, and coding evaluations.",
+      pdfUrl: "/certificates/pdf/et_ai_hackathon_2026.pdf",
+      imgUrl: "/certificates/et_ai_hackathon_2026.png",
+      date: "2026",
+    },
+    {
+      id: "ey-techathon",
+      title: "EY Techathon 5.0 (Stratabid™)",
+      org: "Ernst & Young",
+      badge: "National Semifinalist · Top 4,000 / 2 Lakh+ Teams",
+      desc: "Team Lead for Stratabid™, leading a 5-member team to build an autonomous agentic RFP orchestration system.",
+      pdfUrl: "/certificates/pdf/ey_techathon_2026.pdf",
+      imgUrl: "/certificates/ey_techathon_2026.png",
+      date: "2025",
+    },
+    {
+      id: "tata-imagination",
+      title: "Tata Imagination Challenge",
+      org: "Tata Group",
+      badge: "National Semifinalist",
+      desc: "Selected among top performers in national business problem-solving case competition.",
+      pdfUrl: "/certificates/pdf/tata_imagination_challenge_2026.pdf",
+      imgUrl: "/certificates/tata_imagination_challenge_2026.png",
+      date: "2025",
+    },
+    {
+      id: "flipkart-grid",
+      title: "Flipkart GRiD 8.0 (SDE Track)",
+      org: "Flipkart",
+      badge: "National Semifinalist · Top 2,000 / 1.65 Lakh+ Participants",
+      desc: "Qualified for the National Semifinals in the flagship Software Development (SDE) Track, ranking among the top 2,000 candidates out of 1.65+ Lakh participants across India.",
+      pdfUrl: null,
+      imgUrl: null,
+      date: "2025",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 selection:bg-emerald-500/20">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),_transparent_30%),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100%_100%,36px_36px,36px_36px] opacity-40" />
+    <div className="min-h-screen flex bg-[#08090b] text-[#f1f5f9] font-sans selection:bg-emerald-500/30 selection:text-white">
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {copiedEmail && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-6 right-6 z-50 rounded-xl bg-emerald-500 text-zinc-950 font-semibold px-4 py-2.5 shadow-2xl flex items-center gap-2 backdrop-blur-md text-xs sm:text-sm"
+          >
+            <Check className="h-4 w-4 stroke-[3]" />
+            <span>{SOCIAL_LINKS.email} copied!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-30 border-b border-zinc-800/80 bg-zinc-950/85 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div>
-              <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-zinc-500">
-                AI Engineering & Systems Lab
-              </p>
-              <h1 className="text-sm sm:text-base font-semibold text-zinc-200">
-                {profile.name}
-              </h1>
-            </div>
-            <a
-              href={profile.zapplyxUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden lg:inline-flex rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-medium text-emerald-400 items-center gap-1.5 hover:bg-emerald-500/20 transition"
-            >
-              <Globe className="h-3.5 w-3.5" />
-              zapplyx.com
-            </a>
-          </div>
+      {/* MOBILE HEADER */}
+      <header className="lg:hidden fixed top-0 inset-x-0 z-40 bg-[#08090b]/95 backdrop-blur-md border-b border-white/[0.08] px-5 py-3.5 flex items-center justify-between">
+        <button
+          onClick={() => navigateTo("home")}
+          className="text-left font-spartan font-black text-lg tracking-widest text-white hover:text-emerald-400 transition"
+        >
+          DEVANSH.SHUKLA
+        </button>
 
-          <nav className="hidden items-center gap-6 md:flex">
-            {[
-              { label: "Projects", href: "#projects" },
-              { label: "Experience", href: "#experience" },
-              { label: "Certificates", href: "#certificates" },
-              { label: "Achievements", href: "#achievements" },
-              { label: "Contact", href: "#contact" },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-xs sm:text-sm text-zinc-400 transition hover:text-emerald-400"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <a
-              href={profile.zapplyxUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-md border border-emerald-500/50 bg-emerald-950/40 px-3 py-1.5 text-xs sm:text-sm font-medium text-emerald-300 transition hover:border-emerald-400 hover:bg-emerald-900/50"
-            >
-              <Globe className="h-3.5 w-3.5 text-emerald-400" />
-              ZapplyX.com
-            </a>
-
-            {/* Accent Lighting Theme Switcher */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-900 px-2.5 py-1.5 text-xs sm:text-sm text-zinc-300 hover:text-white hover:border-zinc-500 transition cursor-pointer"
-                title="Change Ambient Accent"
-              >
-                <Palette className="h-3.5 w-3.5 text-zinc-400" />
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: "var(--accent-color)" }}
-                />
-              </button>
-
-              {isThemeMenuOpen ? (
-                <div className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-zinc-700 bg-zinc-950 p-1.5 shadow-2xl z-50">
-                  <p className="px-2.5 py-1 font-mono text-[10px] uppercase text-zinc-500">Accent Theme</p>
-                  {ACCENT_THEMES.map((t) => (
-                    <button
-                      key={t.id}
-                      type="button"
-                      onClick={() => {
-                        setTheme(t.id);
-                        setIsThemeMenuOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-2.5 py-1.5 text-xs rounded-lg transition cursor-pointer ${
-                        theme === t.id
-                          ? "bg-zinc-800 text-white font-medium"
-                          : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className={`h-2.5 w-2.5 rounded-full ${t.dot}`} />
-                        <span>{t.label}</span>
-                      </div>
-                      {theme === t.id ? <CheckCircle2 className="h-3 w-3 text-emerald-400" /> : null}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setIsResumeOpen(true)}
-              className="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs sm:text-sm text-zinc-100 transition hover:border-emerald-500 hover:bg-zinc-800 cursor-pointer"
-            >
-              <FileText className="h-4 w-4 text-emerald-400" />
-              <span>Resume PDF</span>
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setResumeModalOpen(true)}
+            className="rounded-full bg-white/[0.08] border border-white/10 px-3 py-1 font-mono text-[11px] text-zinc-300"
+          >
+            RESUME
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg bg-white/[0.06] text-zinc-300"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </header>
 
-      <main className="relative mx-auto flex max-w-7xl flex-col gap-14 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        {/* Hero Section */}
-        <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+      {/* MOBILE DRAWER */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 sm:p-8 flex flex-col justify-between"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="lg:hidden fixed inset-0 z-30 bg-[#08090b]/95 backdrop-blur-md pt-16 px-6 pb-6 flex flex-col justify-between"
           >
-            <div>
-              <div className="mb-6 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-zinc-500">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
-                  Available for AI & Backend Engineering Roles
-                </div>
-                <a
-                  href={profile.zapplyxUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-emerald-400 hover:underline"
-                >
-                  <Zap className="h-3.5 w-3.5" /> AI Engineering Intern @ ZapplyX
-                </a>
-              </div>
+            <nav className="space-y-2 mt-4 font-mono text-sm uppercase tracking-wider">
+              {NAV_ROUTES.map((route) => {
+                const Icon = route.icon;
+                const isActive = activeRoute === route.id;
+                return (
+                  <button
+                    key={route.id}
+                    onClick={() => navigateTo(route.id)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+                      isActive
+                        ? "sidebar-link-active font-bold text-white bg-white/[0.06]"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{route.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
 
-              <div className="space-y-4">
-                <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-                  Engineering Profile
-                </p>
-                <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  {profile.name}
-                </h2>
-                <p className="text-base sm:text-lg text-emerald-400 font-medium leading-snug">
-                  {profile.role}
-                </p>
-                <p className="max-w-2xl text-sm leading-7 text-zinc-300 sm:text-base">
-                  {profile.tagline}
-                </p>
+            <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
+              <span className="text-xs font-mono text-zinc-500">Theme</span>
+              <div className="flex items-center gap-1.5">
+                {ACCENT_THEMES.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setTheme(t.id)}
+                    className={`h-6 w-6 rounded-full ${t.dot} ${
+                      theme === t.id ? "ring-2 ring-white scale-110" : "opacity-60"
+                    }`}
+                  />
+                ))}
               </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 rounded-md border border-emerald-500 bg-emerald-500 px-4 py-2 text-sm font-semibold text-zinc-950 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition hover:bg-emerald-400"
-                >
-                  <FolderGit2 className="h-4 w-4" />
-                  Explore Projects
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setIsResumeOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:border-emerald-500 hover:bg-zinc-800 cursor-pointer"
-                >
-                  <FileText className="h-4 w-4 text-emerald-400" />
-                  View Resume PDF
-                </button>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-sm text-zinc-300 transition hover:border-zinc-700 hover:text-white"
-                >
-                  <Mail className="h-4 w-4 text-zinc-400" />
-                  Contact
-                </a>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4"
-                >
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
-                    {stat.label}
-                  </p>
-                  <div className="mt-3 flex items-end justify-between gap-2">
-                    <p className="font-mono text-sm sm:text-base font-semibold text-zinc-100">{stat.value}</p>
-                    <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.15em] text-emerald-400 border border-emerald-500/20">
-                      {stat.meta}
-                    </span>
-                  </div>
-                </div>
-              ))}
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
 
-          {/* Quick Technical Summary Card */}
-          <motion.aside
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-            className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 flex flex-col justify-between"
+      {/* =========================================================================
+          DESKTOP PERSISTENT SIDEBAR
+      ========================================================================= */}
+      <aside className="hidden lg:flex w-64 flex-col justify-between fixed top-0 bottom-0 left-0 bg-[#0c0d11] border-r border-white/[0.07] z-30 px-4 py-6 overflow-y-auto">
+        <div>
+          {/* Header Link (Redirects to Home) - Centered and Enlarged without right-edge cutoff */}
+          <div className="pb-1 text-center w-full px-1">
+            <button
+              onClick={() => navigateTo("home")}
+              className="w-full text-center font-spartan font-black text-[20px] tracking-wide text-white hover:text-emerald-400 transition cursor-pointer uppercase block drop-shadow-sm whitespace-nowrap"
+              title="Return to Home"
+            >
+              DEVANSH.SHUKLA
+            </button>
+          </div>
+
+          {/* Animated Pixel Cat Mascot (Centered and Enlarged) */}
+          <div className="my-3 flex items-center justify-center">
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transition-transform duration-300 hover:scale-115 active:scale-95 cursor-pointer"
+              title="Visit GitHub"
+            >
+              <img
+                src="/bongo_cat.gif"
+                alt="Animated Mascot - Devansh Shukla GitHub"
+                className="h-14 w-auto object-contain select-none drop-shadow-md"
+              />
+            </a>
+          </div>
+
+          <hr className="border-white/[0.07] my-3.5" />
+
+          {/* Navigation Routes - Center Aligned */}
+          <nav className="space-y-1.5 font-mono text-xs uppercase tracking-wider">
+            {NAV_ROUTES.map((route) => {
+              const Icon = route.icon;
+              const isActive = activeRoute === route.id;
+              return (
+                <button
+                  key={route.id}
+                  onClick={() => navigateTo(route.id)}
+                  className={`w-full flex items-center justify-center gap-2.5 px-3 py-2.5 rounded-xl transition duration-150 text-center cursor-pointer ${
+                    isActive
+                      ? "sidebar-link-active font-bold text-white shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0 opacity-80" />
+                  <span>{route.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Sidebar Footer Controls (Clean Bottom Row with Resume & Color Palette) */}
+        <div className="pt-4 border-t border-white/[0.07] flex items-center gap-2">
+          <button
+            onClick={() => setResumeModalOpen(true)}
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 py-2.5 px-3 font-mono text-xs text-zinc-200 transition group hover:border-emerald-500/30 cursor-pointer"
+            title="Open Resume"
           >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <p className="font-mono text-xs uppercase tracking-[0.28em] text-zinc-500">
-                  Technical Summary
-                </p>
-                <Brain className="h-4 w-4 text-emerald-400" />
-              </div>
+            <FileText className="h-3.5 w-3.5 text-emerald-400 group-hover:scale-110 transition" />
+            <span>RESUME</span>
+          </button>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-3.5">
-                <div className="flex items-center gap-2">
-                  <GraduationCap className="h-4 w-4 text-emerald-400" />
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-semibold">
-                    Education & Academics
-                  </p>
-                </div>
-                <p className="mt-1.5 text-xs text-zinc-200 font-medium">{profile.education}</p>
-                <p className="mt-0.5 text-[11px] text-zinc-400">Relevant Coursework: Data Structures & Algorithms, OOP, DBMS</p>
-              </div>
+          <div className="relative">
+            <button
+              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
+              className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-400 hover:text-white transition cursor-pointer flex items-center justify-center"
+              title="Change Accent Glow Theme"
+            >
+              <Palette className="h-4 w-4 text-emerald-400" />
+            </button>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-3.5">
-                <div className="flex items-center gap-2">
-                  <Brain className="h-4 w-4 text-emerald-400" />
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-semibold">
-                    AI & LLM Systems
-                  </p>
-                </div>
-                <p className="mt-1.5 font-mono text-[11px] text-emerald-400 leading-relaxed">
-                  LLMs, Prompt Engineering, AI Evaluation, Embeddings, Tool Calling, Multi-Agent Systems, RAG, Realtime Voice AI (LiveKit, Deepgram, ElevenLabs)
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-3.5">
-                <div className="flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-emerald-400" />
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-semibold">
-                    Backend & Distributed Systems
-                  </p>
-                </div>
-                <p className="mt-1.5 font-mono text-[11px] text-zinc-300 leading-relaxed">
-                  FastAPI, Flask, Celery, Redis, MongoDB Atlas, PostgreSQL, WebSockets, Distributed Systems, Async Queues, Docker, Linux, Prometheus
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-3.5">
-                <div className="flex items-center gap-2">
-                  <Code2 className="h-4 w-4 text-emerald-400" />
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-semibold">
-                    Languages & Tools
-                  </p>
-                </div>
-                <p className="mt-1.5 font-mono text-[11px] text-zinc-300 leading-relaxed">
-                  Python, C++, JavaScript, TypeScript, SQL, Git, Pytest, Playwright, Postman
-                </p>
-              </div>
-            </div>
-          </motion.aside>
-        </section>
-
-        {/* Projects Section - Clean & Uniform Cards */}
-        <section id="projects" className="space-y-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-                Engineering Showcase
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                Featured Systems & Projects
-              </h2>
-            </div>
-            <p className="text-xs text-zinc-400 font-mono">
-              Production backends, multi-agent frameworks, realtime voice & AI decision engines
-            </p>
+            <AnimatePresence>
+              {themeMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  className="absolute bottom-full right-0 mb-2 p-2 rounded-xl bg-zinc-900 border border-white/10 shadow-2xl flex flex-col gap-1 z-50 min-w-[140px]"
+                >
+                  {ACCENT_THEMES.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => {
+                        setTheme(t.id);
+                        setThemeMenuOpen(false);
+                      }}
+                      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition text-left cursor-pointer ${
+                        theme === t.id
+                          ? "bg-white/[0.08] text-white font-bold"
+                          : "text-zinc-400 hover:text-zinc-200"
+                      }`}
+                    >
+                      <span className={`h-2.5 w-2.5 rounded-full ${t.dot}`} />
+                      <span>{t.label}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
+        </div>
+      </aside>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {projects.map((project) => (
-              <SpotlightCard
-                key={project.title}
-                className="group rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 flex flex-col justify-between hover:border-zinc-700 transition"
+      {/* =========================================================================
+          MAIN CONTENT AREA (ROUTE VIEWS)
+      ========================================================================= */}
+      <main className="flex-1 lg:ml-64 min-h-screen pt-16 lg:pt-0 flex flex-col justify-between">
+        <div className="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col">
+          <AnimatePresence mode="wait">
+            {/* ---------------------------------------------------------------------
+                ROUTE 1: HOME PAGE
+            --------------------------------------------------------------------- */}
+            {activeRoute === "home" && (
+              <motion.div
+                key="route-home"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-24"
               >
-                <div>
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-zinc-500">
-                        {project.type}
-                      </span>
-                      <h3 className="mt-1 text-xl font-semibold text-zinc-100">
-                        {project.title}
-                      </h3>
-                    </div>
-                    {project.badge ? (
-                      <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 font-mono text-[10px] uppercase text-emerald-400 border border-emerald-500/20">
-                        {project.badge}
-                      </span>
-                    ) : null}
-                  </div>
+                {/* =================================================================
+                    FOLD 1: ONE-VIEW HERO SECTION
+                ================================================================= */}
+                <section className="min-h-[calc(100vh-6rem)] lg:min-h-[86vh] flex flex-col justify-center items-center text-center space-y-6 relative">
+                  {/* Subtle Background Radial Ambient Glow */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-[500px] h-80 sm:h-[500px] bg-emerald-500/[0.07] rounded-full blur-3xl pointer-events-none -z-10" />
 
-                  <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-4 space-y-2">
-                    {project.highlights.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
-                        <CheckCircle2 className="h-3.5 w-3.5 mt-0.5 flex-none text-emerald-400" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-zinc-800/80">
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-zinc-800 bg-zinc-900/60 px-2.5 py-0.5 font-mono text-[10px] text-zinc-300"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    {project.demo ? (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-md border border-emerald-500 bg-emerald-500 px-3.5 py-1.5 text-xs font-semibold text-zinc-950 transition hover:bg-emerald-400"
-                      >
-                        <span>{project.demoLabel || "Live Demo"}</span>
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    ) : null}
-                    {project.repo ? (
-                      <a
-                        href={project.repo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500 hover:text-white"
-                      >
-                        <Github className="h-3.5 w-3.5 text-zinc-400" />
-                        <span>GitHub</span>
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </SpotlightCard>
-            ))}
-          </div>
-        </section>
-
-        {/* Experience & Research Timeline */}
-        <section id="experience" className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-                Experience & Research
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                Engineering Timeline
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-zinc-300">
-                From engineering production multi-agent systems at <strong className="text-emerald-400">ZapplyX</strong> (serving 30+ users and 12,000+ outreach profiles) and realtime voice interviewers (<strong className="text-emerald-400">VoiceHire</strong>) to DSP hardware optimization metaheuristics and competitive programming, this timeline outlines major engineering and research milestones.
-              </p>
-            </div>
-
-            <div className="mt-8 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 font-mono text-xs text-zinc-400 space-y-2">
-              <p className="text-emerald-400 font-semibold uppercase tracking-wider text-[11px]">Core Highlights</p>
-              <p>• 6 Autonomous Agents coordinated with FastAPI, Celery & Redis</p>
-              <p>• 34 DSP Benchmarks evaluated across 7 metaheuristics</p>
-              <p>• Top 4,000 / 2 Lakh+ teams in EY Techathon (Stratabid™)</p>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 sm:p-8">
-            <div className="space-y-6">
-              {timeline.map((item, index) => (
-                <div key={item.label} className="grid gap-4 md:grid-cols-[110px_1fr]">
-                  <div className="relative">
-                    <div className="font-mono text-xs uppercase tracking-[0.15em] text-emerald-400 font-medium">
-                      {item.year}
-                    </div>
-                    {index < timeline.length - 1 ? (
-                      <div className="absolute left-[9px] top-7 h-[calc(100%+24px)] w-px bg-zinc-800" />
-                    ) : null}
-                  </div>
-
-                  <div className="relative rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-                    <div className="absolute left-[-28px] top-5 hidden h-5 w-5 rounded-full border border-zinc-700 bg-zinc-950 md:block">
-                      <div className="m-[5px] h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    </div>
-                    <h3 className="text-base sm:text-lg font-semibold text-zinc-100">{item.label}</h3>
-                    {item.bullets ? (
-                      <div className="mt-3 space-y-2">
-                        {item.bullets.map((bullet, bIdx) => (
-                          <div key={bIdx} className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-zinc-300">
-                            <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
-                            <span>{bullet}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-zinc-400">{item.summary}</p>
-                    )}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {item.metrics.map((metric) => (
-                        <span
-                          key={metric}
-                          className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 font-mono text-[10px] text-zinc-300"
-                        >
-                          {metric}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Certificates & Verified Credentials Section */}
-        <section id="certificates" className="space-y-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-                Official Credentials
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                Certificates & Verified Records
-              </h2>
-            </div>
-            <div className="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 font-mono text-xs text-amber-300 flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-amber-400" />
-              <span>{certificates.length} Verified Credentials</span>
-            </div>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {certificates.map((cert) => (
-              <SpotlightCard
-                key={cert.id}
-                onClick={() => setSelectedCert(cert)}
-                className="group cursor-pointer rounded-2xl border border-zinc-800 bg-zinc-950/90 p-5 sm:p-6 transition hover:border-emerald-500/50 hover:bg-zinc-900/60 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="rounded-full border border-zinc-800 bg-zinc-900 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-300">
-                      {cert.tag}
-                    </span>
-                    <span className="font-mono text-[11px] text-zinc-500">{cert.dates.split(" ")[0]}</span>
-                  </div>
-
-                  {cert.image ? (
-                    <div className="relative mt-3 h-36 w-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 group-hover:border-emerald-500/40 transition">
+                  {/* Circular Profile Photo with Glowing Ring */}
+                  <motion.div
+                    initial={{ scale: 0.85, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="relative group cursor-pointer"
+                  >
+                    <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-emerald-500/50 via-teal-400/30 to-emerald-500/50 blur-md opacity-75 group-hover:opacity-100 transition duration-500" />
+                    <div className="relative h-32 w-32 sm:h-36 sm:w-36 rounded-full p-1 bg-zinc-900 border-2 border-white/20 shadow-2xl overflow-hidden">
                       <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="h-full w-full object-cover object-top group-hover:scale-105 transition duration-300"
-                        loading="lazy"
+                        src={portraitImg}
+                        alt="Devansh Shukla"
+                        className="h-full w-full object-cover object-center rounded-full transform group-hover:scale-105 transition duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
-                      <span className="absolute bottom-2 right-2 rounded-md bg-zinc-950/80 px-2 py-0.5 font-mono text-[9px] text-emerald-300 backdrop-blur border border-emerald-500/20 flex items-center gap-1">
-                        <ExternalLink className="h-2.5 w-2.5" />
-                        <span>Inspect Image</span>
-                      </span>
                     </div>
-                  ) : null}
+                  </motion.div>
 
-                  <h3 className="mt-4 text-lg font-semibold text-zinc-100 group-hover:text-emerald-300 transition">
-                    {cert.title}
-                  </h3>
-                  <p className="mt-1 font-mono text-xs font-semibold text-emerald-400">
-                    {cert.issuer}
-                  </p>
+                  {/* Intro Text */}
+                  <div className="space-y-2.5 max-w-2xl">
+                    <span className="font-serif italic text-sm sm:text-base text-zinc-400 block">
+                      Hi, I'm
+                    </span>
 
-                  <div className="mt-3 rounded-lg border border-amber-500/20 bg-amber-500/5 p-2.5">
-                    <p className="text-xs font-medium text-amber-300">
-                      {cert.highlight}
+                    <h1 className="font-spartan font-black text-4xl sm:text-6xl uppercase tracking-tight text-white drop-shadow-sm">
+                      DEVANSH SHUKLA
+                    </h1>
+
+                    <p className="text-sm sm:text-base text-zinc-300 font-serif leading-relaxed px-4">
+                      AI & backend engineer. I build RAG pipelines, LLM agents, and the systems that run them.
+                    </p>
+
+                    <div className="flex items-center justify-center gap-2 text-xs font-mono text-zinc-400 pt-1">
+                      <span>Based in India</span>
+                      <span>·</span>
+                      <span className="text-emerald-400 font-semibold">{currentTime || "12:00:00 PM"}</span>
+                    </div>
+                  </div>
+
+                  {/* 5 Animated Social & Coding Profile Icons */}
+                  <div className="flex items-center justify-center gap-3 sm:gap-4 pt-1">
+                    {/* 1. GitHub */}
+                    <div className="relative group">
+                      <a
+                        href={SOCIAL_LINKS.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub Profile"
+                        className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/[0.04] hover:bg-white/[0.12] border border-white/10 hover:border-emerald-400/60 text-zinc-300 hover:text-white transition-all duration-300 transform hover:-translate-y-2 hover:scale-115 hover:shadow-[0_10px_20px_-5px_rgba(16,185,129,0.35)] cursor-pointer"
+                      >
+                        <Github className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                      <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-[10px] font-mono text-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-xl z-20">
+                        GitHub
+                      </div>
+                    </div>
+
+                    {/* 2. LinkedIn */}
+                    <div className="relative group">
+                      <a
+                        href={SOCIAL_LINKS.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn Profile"
+                        className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/[0.04] hover:bg-white/[0.12] border border-white/10 hover:border-cyan-400/60 text-zinc-300 hover:text-white transition-all duration-300 transform hover:-translate-y-2 hover:scale-115 hover:shadow-[0_10px_20px_-5px_rgba(6,182,212,0.35)] cursor-pointer"
+                      >
+                        <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                      <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-[10px] font-mono text-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-xl z-20">
+                        LinkedIn
+                      </div>
+                    </div>
+
+                    {/* 3. X (Twitter) */}
+                    <div className="relative group">
+                      <a
+                        href={SOCIAL_LINKS.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="X (Twitter) Profile"
+                        className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/[0.04] hover:bg-white/[0.12] border border-white/10 hover:border-sky-400/60 text-zinc-300 hover:text-white transition-all duration-300 transform hover:-translate-y-2 hover:scale-115 hover:shadow-[0_10px_20px_-5px_rgba(56,189,248,0.35)] cursor-pointer"
+                      >
+                        <XTwitterIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                      <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-[10px] font-mono text-sky-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-xl z-20">
+                        X (Twitter)
+                      </div>
+                    </div>
+
+                    {/* 4. CodeChef */}
+                    <div className="relative group">
+                      <a
+                        href={SOCIAL_LINKS.codechef}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="CodeChef Profile (1824 4★)"
+                        className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/[0.04] hover:bg-white/[0.12] border border-white/10 hover:border-purple-400/60 text-zinc-300 hover:text-white transition-all duration-300 transform hover:-translate-y-2 hover:scale-115 hover:shadow-[0_10px_20px_-5px_rgba(168,85,247,0.35)] cursor-pointer"
+                      >
+                        <CodeChefIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                      <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-[10px] font-mono text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-xl z-20">
+                        CodeChef (4★ 1824)
+                      </div>
+                    </div>
+
+                    {/* 5. Codeforces */}
+                    <div className="relative group">
+                      <a
+                        href={SOCIAL_LINKS.codeforces}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Codeforces Profile (Specialist 1506)"
+                        className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/[0.04] hover:bg-white/[0.12] border border-white/10 hover:border-rose-400/60 text-zinc-300 hover:text-white transition-all duration-300 transform hover:-translate-y-2 hover:scale-115 hover:shadow-[0_10px_20px_-5px_rgba(244,63,94,0.35)] cursor-pointer"
+                      >
+                        <CodeforcesIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                      <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-[10px] font-mono text-rose-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-xl z-20">
+                        Codeforces (Specialist 1506)
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3 Action Buttons */}
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                    <button
+                      onClick={() => navigateTo("projects")}
+                      className="px-7 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-mono font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/25 hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      VIEW MY PROJECTS
+                    </button>
+                    <button
+                      onClick={() => setResumeModalOpen(true)}
+                      className="px-7 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/15 font-mono text-xs uppercase tracking-wider text-zinc-200 transition hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      RESUME
+                    </button>
+                    <button
+                      onClick={() => navigateTo("contact")}
+                      className="px-7 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/15 font-mono text-xs uppercase tracking-wider text-zinc-200 transition hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      CONTACT ME
+                    </button>
+                  </div>
+                </section>
+
+                {/* =================================================================
+                    FOLD 2: CENTERED ACTIVITY MAPS (GITHUB & LEETCODE - REAL DATA)
+                ================================================================= */}
+                <section className="space-y-8 pt-8">
+                  <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+                    {/* 1. GITHUB CONTRIBUTIONS HEATMAP */}
+                    <SpotlightCard className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/[0.07] space-y-5">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-white/[0.06]">
+                        <div className="flex items-center gap-3">
+                          <div className="h-9 w-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-inner">
+                            <Github className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-200">
+                                GITHUB CONTRIBUTIONS
+                              </h3>
+                              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-mono border border-emerald-500/30">
+                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                Live
+                              </span>
+                            </div>
+                            <p className="font-mono text-[11px] text-emerald-400">
+                              {githubStats.total} contributions in the past year
+                            </p>
+                          </div>
+                        </div>
+
+                        <a
+                          href={SOCIAL_LINKS.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-xs font-mono text-zinc-300 hover:text-emerald-400 transition self-start sm:self-auto"
+                        >
+                          <span>View GitHub</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
+
+                      {/* GitHub Activity Grid */}
+                      <div className="overflow-x-auto pb-2 flex justify-center">
+                        <div className="flex gap-1 min-w-[680px]">
+                          {githubStats.weeks.map((week, wIndex) => (
+                            <div key={wIndex} className="flex flex-col gap-1">
+                              {week.map((day, dIndex) => {
+                                const bgClass =
+                                  day.level === 0
+                                    ? "bg-zinc-800/40"
+                                    : day.level === 1
+                                    ? "bg-emerald-950/80 border border-emerald-800/30"
+                                    : day.level === 2
+                                    ? "bg-emerald-700/80"
+                                    : day.level === 3
+                                    ? "bg-emerald-500"
+                                    : "bg-emerald-400";
+                                return (
+                                  <div
+                                    key={dIndex}
+                                    title={`${day.count} contributions on ${day.date}`}
+                                    className={`h-2.5 w-2.5 rounded-sm activity-cell ${bgClass}`}
+                                  />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 text-[11px] font-mono text-zinc-400">
+                        <div className="flex items-center gap-4">
+                          <span>🔥 {githubStats.streak} Days Active Streak</span>
+                          <span>⚡ 24+ Public Repos</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span>Less</span>
+                          <span className="h-2.5 w-2.5 rounded-sm bg-zinc-800/40" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-emerald-950" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-emerald-700" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-emerald-500" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-emerald-400" />
+                          <span>More</span>
+                        </div>
+                      </div>
+                    </SpotlightCard>
+
+                    {/* 2. LEETCODE ACTIVITY & SUBMISSION HEATMAP */}
+                    <SpotlightCard className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/[0.07] space-y-5">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-white/[0.06]">
+                        <div className="flex items-center gap-3">
+                          <div className="h-9 w-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-inner">
+                            <LeetCodeIcon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-200">
+                                LEETCODE SUBMISSIONS & CONTEST RATING
+                              </h3>
+                              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-mono border border-amber-500/30">
+                                <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                                Live
+                              </span>
+                            </div>
+                            <p className="font-mono text-[11px] text-amber-400">
+                              {leetCodeStats.badge} Badge • Contest Rating {leetCodeStats.rating} (Top {leetCodeStats.topPercentage}%)
+                            </p>
+                          </div>
+                        </div>
+
+                        <a
+                          href={SOCIAL_LINKS.leetcode}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-xs font-mono text-zinc-300 hover:text-amber-400 transition self-start sm:self-auto"
+                        >
+                          <span>View LeetCode</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
+
+                      {/* LeetCode Problem Stats Pills */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase block">Total Solved</span>
+                          <span className="text-lg font-mono font-bold text-white">{leetCodeStats.totalSolved}</span>
+                        </div>
+                        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+                          <span className="text-[10px] font-mono text-emerald-400 uppercase block">Easy</span>
+                          <span className="text-lg font-mono font-bold text-emerald-300">{leetCodeStats.easySolved}</span>
+                        </div>
+                        <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-center">
+                          <span className="text-[10px] font-mono text-amber-400 uppercase block">Medium</span>
+                          <span className="text-lg font-mono font-bold text-amber-300">{leetCodeStats.mediumSolved}</span>
+                        </div>
+                        <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-center">
+                          <span className="text-[10px] font-mono text-rose-400 uppercase block">Hard</span>
+                          <span className="text-lg font-mono font-bold text-rose-300">{leetCodeStats.hardSolved}</span>
+                        </div>
+                      </div>
+
+                      {/* LeetCode Activity Grid */}
+                      <div className="overflow-x-auto pb-2 flex justify-center">
+                        <div className="flex gap-1 min-w-[680px]">
+                          {leetCodeStats.weeks.map((week, wIndex) => (
+                            <div key={wIndex} className="flex flex-col gap-1">
+                              {week.map((day, dIndex) => {
+                                const bgClass =
+                                  day.level === 0
+                                    ? "bg-zinc-800/40"
+                                    : day.level === 1
+                                    ? "bg-amber-950/80 border border-amber-800/30"
+                                    : day.level === 2
+                                    ? "bg-amber-700/80"
+                                    : day.level === 3
+                                    ? "bg-amber-500"
+                                    : "bg-amber-400";
+                                return (
+                                  <div
+                                    key={dIndex}
+                                    title={`${day.count} LeetCode submissions on ${day.date}`}
+                                    className={`h-2.5 w-2.5 rounded-sm activity-cell ${bgClass}`}
+                                  />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 text-[11px] font-mono text-zinc-400">
+                        <div className="flex items-center gap-4">
+                          <span>🏅 {leetCodeStats.badge} Badge ({leetCodeStats.rating})</span>
+                          <span>⭐ Global Ranking Top {leetCodeStats.topPercentage}%</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span>Less</span>
+                          <span className="h-2.5 w-2.5 rounded-sm bg-zinc-800/40" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-amber-950" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-amber-700" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-amber-500" />
+                          <span className="h-2.5 w-2.5 rounded-sm bg-amber-400" />
+                          <span>More</span>
+                        </div>
+                      </div>
+                    </SpotlightCard>
+                  </div>
+                </section>
+
+                {/* =================================================================
+                    FOLD 3: ANIMATED TECH STACK SECTION
+                ================================================================= */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center space-y-8 pt-4"
+                >
+                  <div className="space-y-2">
+                    <h2 className="section-title text-2xl sm:text-3xl text-emerald-400">
+                      TECHNOLOGY STACK
+                    </h2>
+                    <p className="font-serif text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto">
+                      Core technical competencies, frameworks, and modern tools I use to build scalable systems.
                     </p>
                   </div>
 
-                  <p className="mt-3 text-xs leading-relaxed text-zinc-400 line-clamp-3">
-                    {cert.description}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+                    {/* Languages */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <Code2 className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">Languages</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["C/C++", "Python", "TypeScript", "JavaScript", "SQL"].map((t) => (
+                          <button key={t} onClick={() => navigateTo("projects")} className="tech-pill cursor-pointer">
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* AI Engineering */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <Terminal className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">AI Engineering</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["LangChain", "LangGraph", "RAG Pipelines", "AI Agents", "LLM Orchestration", "Whisper", "Audio AI"].map((t) => (
+                          <button key={t} onClick={() => navigateTo("projects")} className="tech-pill cursor-pointer">
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Systems & Backend */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <Briefcase className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">Systems & Backend</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["Distributed Systems", "Microservices", "REST APIs", "FastAPI", "Celery", "Node.js", "Docker", "WebSockets"].map((t) => (
+                          <button key={t} onClick={() => navigateTo("projects")} className="tech-pill cursor-pointer">
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Databases */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <Layers className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">Databases</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["PostgreSQL", "MongoDB", "Redis", "ChromaDB"].map((t) => (
+                          <span key={t} className="tech-pill">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Observability */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <Award className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">Observability</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["Langfuse", "Distributed Tracing", "Runtime Instrumentation"].map((t) => (
+                          <span key={t} className="tech-pill">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Tools */}
+                    <div className="p-5 rounded-2xl glass-panel border border-white/[0.08] space-y-3 hover:border-emerald-500/30 transition duration-300">
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="h-4 w-4 text-emerald-400" />
+                        <h3 className="font-spartan font-bold text-base text-white">Tools</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["Git", "GitHub Actions", "Linux", "Postman", "Docker"].map((t) => (
+                          <span key={t} className="tech-pill">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.section>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 2: ABOUT ME PAGE (DIFFERENT ROUTE)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "about" && (
+              <motion.div
+                key="route-about"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center pb-4">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">ABOUT ME</h1>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                  {/* Narrative Bio */}
+                  <div className="lg:col-span-8 space-y-5 font-serif text-sm sm:text-base text-zinc-300 leading-relaxed">
+                    <p>
+                      Hey there! I am <strong className="text-white font-semibold">Devansh</strong>, an AI & backend engineer and Computer Science student at{" "}
+                      <strong className="text-emerald-400 font-semibold">IIIT Bhopal</strong> focused on AI engineering, backend systems, and low-latency production pipelines.
+                    </p>
+
+                    <p>
+                      I work primarily in Python and C++, building RAG pipelines and LLM agents with LangChain and LangGraph, and instrumenting them with telemetry to evaluate real-time behaviors. On the backend, I build high-concurrency microservices and REST APIs backed by FastAPI, Celery, PostgreSQL, MongoDB, and Redis.
+                    </p>
+
+                    <p>
+                      Much of my work involves designing asynchronous worker architectures to eliminate task bottlenecks, handling full-duplex WebSocket audio streaming, and shipping deterministic systems end-to-end with Docker and GitHub Actions.
+                    </p>
+
+                    <p>
+                      I take data structures and algorithms seriously, not as a numbers game, but as a way to reason clearly about performance, edge cases, and trade-offs (1902 LeetCode Knight, 1824 CodeChef 4-Star). I aim for code that is readable, maintainable, and easy to reason about later.
+                    </p>
+                  </div>
+
+                  {/* Right Portrait & Quick Socials */}
+                  <div className="lg:col-span-4 flex flex-col items-center space-y-5">
+                    <div className="relative group">
+                      <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-emerald-500/40 via-cyan-500/30 to-emerald-500/40 blur-md opacity-75 group-hover:opacity-100 transition duration-500" />
+                      <div className="relative h-44 w-44 sm:h-52 sm:w-52 rounded-full p-1 bg-zinc-900 border border-white/20 shadow-2xl overflow-hidden">
+                        <img
+                          src={portraitImg}
+                          alt="Devansh Shukla"
+                          className="h-full w-full object-cover object-center rounded-full"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={SOCIAL_LINKS.twitter}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-10 w-10 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white transition"
+                        title="X (Twitter) Profile"
+                      >
+                        <XTwitterIcon className="h-4 w-4" />
+                      </a>
+                      <a
+                        href={SOCIAL_LINKS.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-10 w-10 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white transition"
+                        title="LinkedIn Profile"
+                      >
+                        <Linkedin className="h-4 w-4" />
+                      </a>
+                      <a
+                        href={SOCIAL_LINKS.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-10 w-10 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white transition"
+                        title="GitHub Profile"
+                      >
+                        <Github className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 3: PROJECTS PAGE
+            --------------------------------------------------------------------- */}
+            {activeRoute === "projects" && (
+              <motion.div
+                key="route-projects"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center space-y-2 pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">PROJECTS</h1>
+                  <p className="font-serif text-sm text-zinc-400 max-w-lg mx-auto">
+                    Open-source projects I have made over the years, including web apps, APIs, and tools.
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
-                  <span className="text-xs font-medium text-zinc-400 group-hover:text-zinc-200 transition flex items-center gap-1">
-                    <span>View Record</span>
-                    <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <BadgeCheck className="h-4 w-4 text-emerald-400" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {projectsList.map((p) => (
+                    <SpotlightCard
+                      key={p.id}
+                      className="p-6 rounded-2xl glass-panel border border-white/[0.08] flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition group"
+                    >
+                      <div className="space-y-3">
+                        <time className="font-mono text-xs text-zinc-500 font-semibold">{p.year}</time>
+                        <h2 className="font-spartan font-bold text-lg text-white group-hover:text-emerald-400 transition">
+                          {p.title}
+                        </h2>
+
+                        <div className="flex flex-wrap gap-1.5">
+                          {p.tags.map((t) => (
+                            <span
+                              key={t}
+                              className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.06] text-zinc-300"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+
+                        <p className="font-serif text-xs text-zinc-400 leading-relaxed">
+                          {p.desc}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-3 border-t border-white/[0.06]">
+                        {p.demoUrl && (
+                          <a
+                            href={p.demoUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-3 py-1 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/25 font-mono text-[11px] font-semibold transition flex items-center gap-1"
+                          >
+                            <span>DEMO</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                        {p.sourceUrl && (
+                          <a
+                            href={p.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-3 py-1 rounded-md bg-white/[0.05] hover:bg-white/10 font-mono text-[11px] font-semibold text-zinc-300 hover:text-white transition flex items-center gap-1"
+                          >
+                            <span>SOURCE</span>
+                            <Github className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </SpotlightCard>
+                  ))}
                 </div>
-              </SpotlightCard>
-            ))}
-          </div>
-        </section>
+              </motion.div>
+            )}
 
-        {/* Achievements & Distinctions */}
-        <section id="achievements" className="space-y-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-              Honors & Distinctions
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-              Key Achievements & Contest Ranks
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-              National competitive programming contest ranks, machine learning selections, and hackathon recognitions.
-            </p>
-          </div>
+            {/* ---------------------------------------------------------------------
+                ROUTE 4: EXPERIENCE PAGE
+            --------------------------------------------------------------------- */}
+            {activeRoute === "experience" && (
+              <motion.div
+                key="route-experience"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">EXPERIENCE</h1>
+                </div>
 
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {achievements.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-xs sm:text-sm leading-relaxed text-zinc-300 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <h4 className="font-semibold text-zinc-100 text-xs sm:text-sm">{item.title}</h4>
-                      {item.badge ? (
-                        <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
-                          {item.badge}
+                <div className="space-y-6 max-w-3xl mx-auto">
+                  {experienceList.map((exp, idx) => (
+                    <SpotlightCard
+                      key={idx}
+                      className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/[0.08] space-y-4"
+                    >
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="text-zinc-400">{exp.period}</span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          {exp.type}
                         </span>
-                      ) : null}
+                      </div>
+
+                      <div>
+                        <h2 className="font-spartan font-bold text-xl text-white">{exp.role}</h2>
+                        <a
+                          href={exp.link || "https://www.zapplyx.com"}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-serif text-sm font-semibold text-emerald-400 hover:underline inline-flex items-center gap-1"
+                        >
+                          <span>{exp.org}</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
+
+                      <p className="font-serif text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                        {exp.summary}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {exp.stack.map((t) => (
+                          <span
+                            key={t}
+                            className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.06] text-zinc-300"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <ul className="space-y-2 pt-2 border-t border-white/[0.06] text-xs sm:text-sm font-serif text-zinc-300 list-disc list-inside">
+                        {exp.bullets.map((b, bIdx) => (
+                          <li key={bIdx} className="leading-relaxed">
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </SpotlightCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 5: WORKING ON PAGE (2-COLUMN REFERENCE STYLE)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "working-on" && (
+              <motion.div
+                key="route-working-on"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">
+                    WORKING ON
+                  </h1>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                  {workingOnList.map((item) => (
+                    <SpotlightCard
+                      key={item.id}
+                      className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/[0.08] flex flex-col justify-between space-y-5 hover:border-emerald-500/30 transition group"
+                    >
+                      <div className="space-y-4">
+                        {/* Top Header Row with Title & GitHub Link */}
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <h2 className="font-spartan font-bold text-xl text-emerald-400 group-hover:text-emerald-300 transition">
+                              {item.title}
+                            </h2>
+                            <p className="font-spartan font-bold text-sm text-white pt-1">
+                              {item.subtitle}
+                            </p>
+                          </div>
+
+                          {item.githubUrl && (
+                            <a
+                              href={item.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/10 text-zinc-400 hover:text-white transition cursor-pointer shrink-0"
+                              title="View Source on GitHub"
+                            >
+                              <Github className="h-4 w-4" />
+                            </a>
+                          )}
+                        </div>
+
+                        {/* Description */}
+                        <p className="font-serif text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                          {item.desc}
+                        </p>
+
+                        {/* How it works */}
+                        <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+                          <p className="font-spartan font-bold text-xs text-white uppercase tracking-wider">
+                            How it works:
+                          </p>
+                          <ul className="space-y-1.5 text-xs font-serif text-zinc-300 list-disc list-inside">
+                            {item.howItWorks.map((bullet, bIdx) => (
+                              <li key={bIdx} className="leading-relaxed">
+                                {bullet}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Tech Stack */}
+                        <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+                          <p className="font-spartan font-bold text-xs text-white uppercase tracking-wider">
+                            Tech Stack:
+                          </p>
+                          <div className="space-y-1 text-xs font-serif text-zinc-300">
+                            {item.techStack.map((tech, tIdx) => (
+                              <p key={tIdx}>
+                                <span className="font-mono text-[11px] text-zinc-400 font-semibold">{tech.label}:</span>{" "}
+                                <span className="text-zinc-200">{tech.val}</span>
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom Live Demo Link */}
+                      <div className="pt-2">
+                        {item.liveUrl ? (
+                          <a
+                            href={item.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 hover:underline font-semibold"
+                          >
+                            <span>Live Demo</span>
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        ) : (
+                          <span className="text-zinc-600 font-mono text-[11px] italic">
+                            Internal Architecture
+                          </span>
+                        )}
+                      </div>
+                    </SpotlightCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 6: PROGRAMMING PAGE (DYNAMIC LIVE METRICS)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "programming" && (
+              <motion.div
+                key="route-programming"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center space-y-2 pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">PROGRAMMING</h1>
+                  <p className="font-serif text-sm text-zinc-400 max-w-lg mx-auto">
+                    Live competitive programming profiles, algorithmic contest ratings, and real problem-solving stats.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                  {/* LeetCode Card (Dynamic) */}
+                  <SpotlightCard className="p-6 rounded-2xl glass-panel border border-white/[0.08] space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <LeetCodeIcon className="h-5 w-5" />
+                        <span className="font-spartan font-bold text-lg text-white">LeetCode</span>
+                      </div>
+                      <span className="font-mono text-xs text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/20">
+                        {leetCodeStats.badge} Rank
+                      </span>
                     </div>
-                    <p className="text-xs text-zinc-400 leading-normal">{item.text}</p>
-                  </div>
-                  {item.link ? (
+
+                    <div className="space-y-1">
+                      <p className="font-mono text-3xl font-black text-white">{leetCodeStats.rating}</p>
+                      <p className="font-serif text-xs text-zinc-400">
+                        Contest Rating (Top {leetCodeStats.topPercentage}% Globally)
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 py-1">
+                      <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-center">
+                        <span className="text-[10px] font-mono text-emerald-400 block">Easy</span>
+                        <span className="font-mono font-bold text-sm text-white">{leetCodeStats.easySolved}</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-center">
+                        <span className="text-[10px] font-mono text-amber-400 block">Medium</span>
+                        <span className="font-mono font-bold text-sm text-white">{leetCodeStats.mediumSolved}</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-center">
+                        <span className="text-[10px] font-mono text-rose-400 block">Hard</span>
+                        <span className="font-mono font-bold text-sm text-white">{leetCodeStats.hardSolved}</span>
+                      </div>
+                    </div>
+
+                    <p className="font-serif text-xs text-zinc-300 leading-relaxed">
+                      {leetCodeStats.totalSolved}+ problems solved across Advanced Dynamic Programming, Graph Theory, Segment Trees, and Greedy algorithms.
+                    </p>
+
                     <a
-                      href={item.link}
+                      href={SOCIAL_LINKS.leetcode}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-amber-400 hover:underline pt-2 font-semibold"
                     >
-                      <span>{item.linkText || "View Link"}</span>
+                      <span>View LeetCode Profile</span>
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                  </SpotlightCard>
 
-        {/* Contact Surface */}
-        <section id="contact" className="rounded-2xl border border-zinc-800 bg-zinc-950/90 p-6 sm:p-8">
-          <p className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
-            Contact Surface
-          </p>
-          <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-            Connect & Collaborate
-          </h2>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <a
-              href={`mailto:${profile.email}`}
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-emerald-500/60 hover:bg-zinc-900/80"
-            >
-              <Mail className="h-5 w-5 text-emerald-400" />
-              <p className="mt-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
-                Email
-              </p>
-              <p className="mt-1 font-mono text-sm text-zinc-200">{profile.email}</p>
-            </a>
-            <a
-              href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-amber-500/60 hover:bg-zinc-900/80"
-            >
-              <Phone className="h-5 w-5 text-amber-400" />
-              <p className="mt-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
-                Phone
-              </p>
-              <p className="mt-1 font-mono text-sm text-zinc-200">{profile.phone}</p>
-            </a>
-          </div>
-
-          <div className="mt-4 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-zinc-500">
-              Profiles & Coding Handles
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {profile.links.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex items-center justify-between rounded-xl border px-4 py-3 transition ${
-                      link.featured
-                        ? "border-emerald-500/40 bg-emerald-950/20 hover:border-emerald-400 hover:bg-emerald-950/40"
-                        : "border-zinc-800 bg-zinc-950 hover:border-zinc-700 hover:bg-zinc-900"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon className={`h-4 w-4 ${link.featured ? "text-emerald-400" : "text-zinc-400"}`} />
-                      <span className={`text-sm ${link.featured ? "text-emerald-300 font-semibold" : "text-zinc-200"}`}>{link.label}</span>
+                  {/* CodeChef Card */}
+                  <SpotlightCard className="p-6 rounded-2xl glass-panel border border-white/[0.08] space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <CodeChefIcon className="h-5 w-5" />
+                        <span className="font-spartan font-bold text-lg text-white">CodeChef</span>
+                      </div>
+                      <span className="font-mono text-xs text-purple-400 font-bold px-2 py-0.5 rounded bg-purple-400/10 border border-purple-400/20">
+                        4-Star ★★★★
+                      </span>
                     </div>
-                    <ExternalLink className={`h-4 w-4 ${link.featured ? "text-emerald-400" : "text-zinc-600"}`} />
-                  </a>
-                );
-              })}
-            </div>
-          </div>
 
-          <div className="mt-4 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-zinc-500">
-              Role & Engagement Alignment
-            </p>
-            <div className="mt-4 space-y-3">
-              {[
-                "AI Engineering, LLM Systems & Agentic Orchestration roles",
-                "Backend Engineering & Distributed Systems (FastAPI, Celery, Redis, MongoDB Atlas, PostgreSQL)",
-                "Realtime Voice AI, Audio Pipelines & Sub-150ms Turn Detection",
-                "Hardware Optimization & Low-Latency Algorithmic Systems Research",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-400" />
-                  <span>{item}</span>
+                    <div className="space-y-1">
+                      <p className="font-mono text-3xl font-black text-white">1824</p>
+                      <p className="font-serif text-xs text-zinc-400">Peak Rating (Division 1)</p>
+                    </div>
+
+                    <p className="font-serif text-xs text-zinc-300 leading-relaxed">
+                      Regular competitor in long and short rated algorithmic rounds on Division 1 problemsets with consistent rank advancements.
+                    </p>
+
+                    <a
+                      href={SOCIAL_LINKS.codechef}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-purple-400 hover:underline pt-2 font-semibold"
+                    >
+                      <span>View CodeChef Profile</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </SpotlightCard>
+
+                  {/* Codeforces Card */}
+                  <SpotlightCard className="p-6 rounded-2xl glass-panel border border-white/[0.08] space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <CodeforcesIcon className="h-5 w-5" />
+                        <span className="font-spartan font-bold text-lg text-white">Codeforces</span>
+                      </div>
+                      <span className="font-mono text-xs text-cyan-400 font-bold px-2 py-0.5 rounded bg-cyan-400/10 border border-cyan-400/20">
+                        Specialist 1506
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <p className="font-mono text-3xl font-black text-white">1506</p>
+                      <p className="font-serif text-xs text-zinc-400">Contest Rating</p>
+                    </div>
+
+                    <p className="font-serif text-xs text-zinc-300 leading-relaxed">
+                      Active competitive programmer participating in Div 2 / Div 3 rated rounds solving speed and greedy implementation problems.
+                    </p>
+
+                    <a
+                      href={SOCIAL_LINKS.codeforces}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-cyan-400 hover:underline pt-2 font-semibold"
+                    >
+                      <span>View Codeforces Profile</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </SpotlightCard>
+
+                  {/* GitHub Activity Summary (Dynamic) */}
+                  <SpotlightCard className="p-6 rounded-2xl glass-panel border border-white/[0.08] space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Github className="h-5 w-5" />
+                        <span className="font-spartan font-bold text-lg text-white">GitHub</span>
+                      </div>
+                      <span className="font-mono text-xs text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-400/10 border border-emerald-400/20 flex items-center gap-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Live Synced
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <p className="font-mono text-3xl font-black text-white">{githubStats.total}+</p>
+                      <p className="font-serif text-xs text-zinc-400">
+                        Contributions in Past Year · Active Streak: {githubStats.streak} Days
+                      </p>
+                    </div>
+
+                    <p className="font-serif text-xs text-zinc-300 leading-relaxed">
+                      Continuous daily open-source commits across distributed backends, LLM agents, and full-stack systems.
+                    </p>
+
+                    <a
+                      href={SOCIAL_LINKS.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 hover:underline pt-2 font-semibold"
+                    >
+                      <span>View GitHub Profile</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </SpotlightCard>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 7: CERTIFICATES & RECOGNITION PAGE (DEDICATED SECTION)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "certificates" && (
+              <motion.div
+                key="route-certificates"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-center space-y-2 pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">CERTIFICATES</h1>
+                  <p className="font-serif text-sm text-zinc-400 max-w-lg mx-auto">
+                    National hackathon distinctions, industry recognitions, and competitive program selections.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                  {honorsList.map((h) => (
+                    <SpotlightCard
+                      key={h.id}
+                      className="p-5 sm:p-6 rounded-2xl glass-panel border border-white/[0.08] flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition group"
+                    >
+                      <div className="space-y-2.5">
+                        <div className="flex items-center justify-between text-xs font-mono">
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-semibold">
+                            {h.badge}
+                          </span>
+                          <span className="text-zinc-400">{h.date}</span>
+                        </div>
+
+                        <div>
+                          <h2 className="font-spartan font-bold text-lg text-white group-hover:text-emerald-400 transition">
+                            {h.title}
+                          </h2>
+                          <p className="font-mono text-xs text-emerald-400/90 font-medium">{h.org}</p>
+                        </div>
+
+                        <p className="font-serif text-xs text-zinc-300 leading-relaxed">
+                          {h.desc}
+                        </p>
+                      </div>
+
+                      {/* Visible Embedded Certificate Preview */}
+                      {h.imgUrl ? (
+                        <div
+                          onClick={() => setSelectedCert(h)}
+                          className="relative rounded-xl overflow-hidden border border-white/10 bg-zinc-950 cursor-pointer group/img"
+                          title="Click to zoom certificate"
+                        >
+                          <img
+                            src={h.imgUrl}
+                            alt={h.title}
+                            className="w-full h-48 sm:h-52 object-contain bg-black/40 group-hover/img:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs backdrop-blur-[2px]">
+                            <span>Click to Zoom</span>
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center font-mono text-xs text-zinc-400">
+                          Verified National Competition Distinction
+                        </div>
+                      )}
+                    </SpotlightCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 8: EDUCATION & KEY ACHIEVEMENTS (2-COLUMN REFERENCE LAYOUT)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "education" && (
+              <motion.div
+                key="route-education"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-6"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* LEFT COLUMN: EDUCATION TIMELINE */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <h1 className="section-title text-2xl sm:text-3xl text-emerald-400">
+                      EDUCATION
+                    </h1>
+
+                    <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-2 sm:before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-white/10">
+                      {educationList.map((edu, idx) => (
+                        <div key={idx} className="relative group">
+                          {/* Timeline Node Dot */}
+                          <div className="absolute -left-6 sm:-left-8 top-5 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-[#08090b] border-2 border-emerald-400 group-hover:scale-125 transition-transform duration-200 flex items-center justify-center">
+                            <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400 group-hover:bg-white transition-colors" />
+                          </div>
+
+                          {/* Clickable Card */}
+                          <a
+                            href={edu.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
+                            title={`Visit ${edu.institution}`}
+                          >
+                            <SpotlightCard className="p-5 sm:p-6 rounded-2xl glass-panel border border-white/[0.08] hover:border-emerald-500/40 transition duration-300 space-y-3 cursor-pointer group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+                              <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+                                <span>{edu.period}</span>
+                                <ExternalLink className="h-3.5 w-3.5 text-zinc-500 group-hover:text-emerald-400 transition" />
+                              </div>
+
+                              <div>
+                                <h2 className="font-spartan font-bold text-lg sm:text-xl text-white group-hover:text-emerald-400 transition">
+                                  {edu.institution}
+                                </h2>
+                                <p className="font-serif text-sm font-semibold text-emerald-400/90 pt-0.5">
+                                  {edu.degree}
+                                </p>
+                                <p className="font-mono text-xs text-zinc-400 pt-1">
+                                  {edu.score}
+                                </p>
+                              </div>
+
+                              {edu.courses && edu.courses.length > 0 && (
+                                <div className="pt-2 border-t border-white/[0.06] space-y-2">
+                                  <p className="font-mono text-[11px] text-zinc-400">
+                                    Relevant Coursework:
+                                  </p>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {edu.courses.map((c) => (
+                                      <span
+                                        key={c}
+                                        className="font-mono text-[10px] px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-zinc-300"
+                                      >
+                                        {c}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </SpotlightCard>
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: KEY ACHIEVEMENTS */}
+                  <div className="lg:col-span-5 space-y-6">
+                    <h2 className="section-title text-2xl sm:text-3xl text-emerald-400">
+                      KEY ACHIEVEMENTS
+                    </h2>
+
+                    <div className="space-y-4">
+                      {keyAchievementsList.map((ach, idx) => {
+                        const Icon = ach.icon;
+                        return (
+                          <SpotlightCard
+                            key={idx}
+                            className="p-4 sm:p-5 rounded-2xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 transition flex items-start gap-3.5"
+                          >
+                            <div className="h-8 w-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <p className="font-serif text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                              {ach.text}
+                            </p>
+                          </SpotlightCard>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ---------------------------------------------------------------------
+                ROUTE 9: CONTACT ME PAGE (GET IN TOUCH 2-COLUMN REFERENCE STYLE)
+            --------------------------------------------------------------------- */}
+            {activeRoute === "contact" && (
+              <motion.div
+                key="route-contact"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8 max-w-5xl mx-auto w-full"
+              >
+                <div className="text-center pb-2">
+                  <h1 className="section-title text-3xl sm:text-4xl text-emerald-400">
+                    GET IN TOUCH
+                  </h1>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* LEFT COLUMN: Let's Chat & Contact Links */}
+                  <div className="lg:col-span-5 space-y-6">
+                    <div className="space-y-2">
+                      <h2 className="font-spartan font-bold text-xl sm:text-2xl text-white">
+                        Let's Chat!
+                      </h2>
+                      <p className="font-serif text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                        If you are interested in collaborating, discussing an idea, or just having a thoughtful conversation, feel free to reach out.
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      {/* Email Card with Copy Button */}
+                      <div className="flex items-center justify-between p-3.5 rounded-xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 transition group">
+                        <a
+                          href={`mailto:${SOCIAL_LINKS.email}`}
+                          className="flex items-center gap-3 text-zinc-300 hover:text-white transition overflow-hidden"
+                        >
+                          <div className="h-8 w-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                            <Mail className="h-4 w-4" />
+                          </div>
+                          <span className="font-mono text-xs sm:text-sm text-zinc-200 truncate">
+                            {SOCIAL_LINKS.email}
+                          </span>
+                        </a>
+                        <button
+                          onClick={copyEmailToClipboard}
+                          className="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/10 text-zinc-400 hover:text-white transition cursor-pointer shrink-0 ml-2"
+                          title="Copy Email"
+                        >
+                          <Copy className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+
+                      {/* WhatsApp / Phone Card */}
+                      <a
+                        href="https://wa.me/919289153800"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3.5 rounded-xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 text-zinc-300 hover:text-white transition group cursor-pointer"
+                      >
+                        <div className="h-8 w-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                          <Phone className="h-4 w-4" />
+                        </div>
+                        <span className="font-serif text-xs sm:text-sm font-semibold text-zinc-200">
+                          WhatsApp (+91 9289153800)
+                        </span>
+                      </a>
+
+                      {/* LinkedIn Card */}
+                      <a
+                        href={SOCIAL_LINKS.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3.5 rounded-xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 text-zinc-300 hover:text-white transition group cursor-pointer"
+                      >
+                        <div className="h-8 w-8 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                          <Linkedin className="h-4 w-4" />
+                        </div>
+                        <span className="font-serif text-xs sm:text-sm font-semibold text-zinc-200">
+                          LinkedIn
+                        </span>
+                      </a>
+
+                      {/* GitHub Card */}
+                      <a
+                        href={SOCIAL_LINKS.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3.5 rounded-xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 text-zinc-300 hover:text-white transition group cursor-pointer"
+                      >
+                        <div className="h-8 w-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-zinc-200 shrink-0">
+                          <Github className="h-4 w-4" />
+                        </div>
+                        <span className="font-serif text-xs sm:text-sm font-semibold text-zinc-200">
+                          GitHub
+                        </span>
+                      </a>
+
+                      {/* X (Twitter) Card */}
+                      <a
+                        href={SOCIAL_LINKS.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3.5 rounded-xl glass-panel border border-white/[0.08] hover:border-emerald-500/30 text-zinc-300 hover:text-white transition group cursor-pointer"
+                      >
+                        <div className="h-8 w-8 rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+                          <XTwitterIcon className="h-4 w-4" />
+                        </div>
+                        <span className="font-serif text-xs sm:text-sm font-semibold text-zinc-200">
+                          X (Twitter)
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: Contact Message Form */}
+                  <div className="lg:col-span-7">
+                    <SpotlightCard className="p-6 sm:p-8 rounded-2xl glass-panel border border-white/[0.08] space-y-4">
+                      <form onSubmit={handleSendMessage} className="space-y-4">
+                        <div className="space-y-1.5">
+                          <label className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-300">
+                            YOUR NAME
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            disabled={formStatus === "submitting"}
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="Your Name"
+                            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500 text-sm font-serif transition disabled:opacity-50"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-300">
+                            YOUR EMAIL
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            disabled={formStatus === "submitting"}
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            placeholder="xyz@gmail.com"
+                            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500 text-sm font-serif transition disabled:opacity-50"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-300">
+                            MESSAGE
+                          </label>
+                          <textarea
+                            required
+                            rows={5}
+                            disabled={formStatus === "submitting"}
+                            value={formData.message}
+                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            placeholder="What's on your mind?"
+                            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500 text-sm font-serif transition resize-none disabled:opacity-50"
+                          />
+                        </div>
+
+                        {/* Status Banners */}
+                        {formStatus === "success" && (
+                          <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-serif text-xs flex items-center gap-2.5">
+                            <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+                            <span>Message delivered directly to my inbox! I will get back to you soon.</span>
+                          </div>
+                        )}
+
+                        {formStatus === "error" && (
+                          <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 font-serif text-xs space-y-2">
+                            <div className="flex items-center gap-2">
+                              <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
+                              <span>{errorMessage}</span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={handleFallbackMailto}
+                              className="text-xs font-mono text-white underline hover:text-emerald-400 cursor-pointer block text-left"
+                            >
+                              → Click here to send via email client instead
+                            </button>
+                          </div>
+                        )}
+
+                        <button
+                          type="submit"
+                          disabled={formStatus === "submitting"}
+                          className={`w-full py-3.5 px-6 rounded-xl font-mono text-xs uppercase tracking-wider font-bold transition flex items-center justify-center gap-2 group cursor-pointer ${
+                            formStatus === "success"
+                              ? "bg-emerald-500/20 border border-emerald-500/50 text-emerald-300"
+                              : formStatus === "submitting"
+                              ? "bg-white/[0.04] border border-white/10 text-zinc-400 cursor-wait"
+                              : "bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white hover:border-emerald-500/40"
+                          }`}
+                        >
+                          {formStatus === "submitting" ? (
+                            <>
+                              <Loader2 className="h-3.5 w-3.5 text-emerald-400 animate-spin" />
+                              <span>SENDING DIRECTLY...</span>
+                            </>
+                          ) : formStatus === "success" ? (
+                            <>
+                              <Check className="h-3.5 w-3.5 text-emerald-400" />
+                              <span>MESSAGE SENT DIRECTLY!</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>SEND MESSAGE</span>
+                              <Send className="h-3.5 w-3.5 text-emerald-400 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+                            </>
+                          )}
+                        </button>
+                      </form>
+                    </SpotlightCard>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* =====================================================================
+            GLOBAL FOOTER (Together in Center at Bottom)
+        ===================================================================== */}
+        <footer className="mt-auto py-8 border-t border-white/[0.08] flex flex-wrap items-center justify-center gap-3 text-center font-serif text-xs sm:text-sm text-zinc-400">
+          <span>Built with React, Next.js, and care.</span>
+          <span className="text-zinc-600 hidden sm:inline">·</span>
+          <div className="flex items-center gap-2 text-zinc-400">
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-white transition duration-200 p-1"
+              aria-label="GitHub Profile"
+              title="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-white transition duration-200 p-1"
+              aria-label="LinkedIn Profile"
+              title="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-white transition duration-200 p-1"
+              aria-label="X (Twitter) Profile"
+              title="X (Twitter)"
+            >
+              <XTwitterIcon className="h-4 w-4" />
+            </a>
           </div>
-        </section>
+          <span className="text-zinc-600 hidden sm:inline">·</span>
+          <span>(c) {new Date().getFullYear()} Devansh Shukla</span>
+        </footer>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-20 border-t border-zinc-800/80 bg-zinc-950/50 py-8 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-500">
-            Engineered by <span className="text-zinc-300 font-sans font-semibold">Devansh Shukla</span> | AI Engineering Intern @{" "}
-            <a href="https://www.zapplyx.com" target="_blank" rel="noreferrer" className="text-emerald-400 hover:underline">
-              ZapplyX
-            </a>
-          </p>
-        </div>
-      </footer>
+      {/* =========================================================================
+          MODAL 1: RESUME PDF MODAL
+      ========================================================================= */}
+      <AnimatePresence>
+        {resumeModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+            onClick={() => setResumeModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-4xl h-[90vh] bg-zinc-900 border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="px-5 py-3.5 bg-zinc-950 border-b border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-emerald-400" />
+                  <span className="font-mono text-xs sm:text-sm font-semibold text-zinc-200">
+                    Devansh_Shukla_Resume.pdf
+                  </span>
+                </div>
 
-      {/* Modal for Resume Viewer */}
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+                <div className="flex items-center gap-2">
+                  <a
+                    href="/resume/Devansh_Shukla_Resume.pdf"
+                    download="Devansh_Shukla_Resume.pdf"
+                    className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold px-3 py-1.5 font-mono text-xs flex items-center gap-1.5 transition"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    <span>Download</span>
+                  </a>
+                  <button
+                    onClick={() => setResumeModalOpen(false)}
+                    className="p-1.5 rounded-lg bg-white/[0.06] hover:bg-white/10 text-zinc-400 hover:text-white transition cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
 
-      {/* Modal for Certificate Inspection */}
-      <CertificateModal cert={selectedCert} onClose={() => setSelectedCert(null)} />
+              <div className="flex-1 bg-zinc-950 p-2 overflow-auto flex items-center justify-center">
+                <object
+                  data="/resume/Devansh_Shukla_Resume.pdf"
+                  type="application/pdf"
+                  className="w-full h-full rounded-lg"
+                >
+                  <div className="text-center p-8 space-y-4">
+                    <img
+                      src="/resume/Devansh_Shukla_Resume.png"
+                      alt="Devansh Shukla Resume"
+                      className="max-h-[75vh] mx-auto rounded-lg shadow-lg border border-white/10"
+                    />
+                    <a
+                      href="/resume/Devansh_Shukla_Resume.pdf"
+                      download="Devansh_Shukla_Resume.pdf"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-zinc-950 font-bold font-mono text-xs"
+                    >
+                      <Download className="h-4 w-4" />
+                      <span>Download PDF Directly</span>
+                    </a>
+                  </div>
+                </object>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* =========================================================================
+          MODAL 2: CERTIFICATE PREVIEW MODAL
+      ========================================================================= */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-3xl max-h-[90vh] bg-zinc-900 border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="px-5 py-3.5 bg-zinc-950 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-sm text-zinc-200">
+                    {selectedCert.title}
+                  </h3>
+                  <p className="font-mono text-[10px] text-emerald-400">
+                    {selectedCert.badge} • {selectedCert.org}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <a
+                    href={selectedCert.pdfUrl}
+                    download
+                    className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold px-3 py-1.5 font-mono text-xs flex items-center gap-1.5 transition"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    <span>Download</span>
+                  </a>
+                  <button
+                    onClick={() => setSelectedCert(null)}
+                    className="p-1.5 rounded-lg bg-white/[0.06] hover:bg-white/10 text-zinc-400 hover:text-white transition cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex-1 bg-zinc-950 p-4 overflow-auto flex items-center justify-center">
+                <img
+                  src={selectedCert.imgUrl}
+                  alt={selectedCert.title}
+                  className="max-h-[70vh] w-auto object-contain rounded-lg border border-white/10 shadow-lg"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-
-export default App;
